@@ -1,4 +1,9 @@
 package co.com.unibague.pedidos.service.impl;
 
-public interface IMesaService {
+import co.com.unibague.pedidos.model.Mesa;
+import co.com.unibague.pedidos.service.exception.NoExisteEntidadExcepcion;
+
+public interface IMesaService
+{
+    Iterable<Mesa> listarTodos() throws NoExisteEntidadExcepcion;
 }

@@ -1,4 +1,11 @@
 package co.com.unibague.pedidos.model;
 
-public class BaseEntity {
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
+public class BaseEntity implements Serializable
+{
+    private LocalDateTime darFecha;
+    private LocalDateTime actualizarFecha;
+    private boolean esActivo;
 }

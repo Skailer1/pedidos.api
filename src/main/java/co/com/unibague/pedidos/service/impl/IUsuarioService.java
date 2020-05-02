@@ -1,18 +1,20 @@
 package co.com.unibague.pedidos.service.impl;
 
 import co.com.unibague.pedidos.model.Usuario;
+import co.com.unibague.pedidos.service.exception.DataIncorrectaExcepcion;
+import co.com.unibague.pedidos.service.exception.EntidadInactivaExcepcion;
+import co.com.unibague.pedidos.service.exception.NoExisteEntidadExcepcion;
+import co.com.unibague.pedidos.service.exception.YaExisteEntidadExcepcion;
 
 public interface IUsuarioService
 {
-    void crear(Usuario usuario) throws Exception;
+    void crear(Usuario usuario) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion, YaExisteEntidadExcepcion;
 
-    void actualizar(Integer id, Usuario usuario) throws Exception;
+    void actualizar(Long id, Usuario usuario) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion;
 
-    boolean eliminar(Integer id) throws Exception;
+    boolean eliminar(Long id) throws NoExisteEntidadExcepcion, EntidadInactivaExcepcion;
 
-    boolean eliminarTodos();
+    Iterable<Usuario> listarTodos() throws NoExisteEntidadExcepcion;;
 
-    Iterable<Usuario> listarTodos();
-
-    Usuario buscarPorId(Integer id) throws Exception;
+    Usuario buscarPorId(Long id) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion;
 }
