@@ -24,26 +24,26 @@ public class DocumentoController {
     @PostMapping(value = "documento", headers = "Accept=application/json")
     public ResponseEntity<?> crear(@RequestBody TipoDocumentoDTO documento) {
         try {
-            return new ResponseEntity<>(documentoService.crear(documento.covertirDocumento()), HttpStatus.CREATED);
-        } catch (YaExisteEntidadExcepcion yaExisteEntidadExcepcion) {
+            return new ResponseEntity<>(documentoService.crear(documento.covertirTipoDocumento()), HttpStatus.CREATED);
+        } catch (YaExisteEntidadExcepcion | DataIncorrectaExcepcion | EntidadInactivaExcepcion exception) {
             return new ResponseEntity<>(RespuestaBaseDTO.builder()
                     .codigoEstado(HttpStatus.CONFLICT.value())
-                    .mensaje(yaExisteEntidadExcepcion.getMessage())
+                    .mensaje(exception.getMessage())
                     .isCorrecto(false)
                     .build(), HttpStatus.CONFLICT);
-        } catch (DataIncorrectaExcepcion dataIncorrectaExcepcion) {
+        } catch (NoExisteEntidadExcepcion noExisteEntidadExcepcion) {
             return new ResponseEntity<>(RespuestaBaseDTO.builder()
-                    .codigoEstado(HttpStatus.CONFLICT.value())
-                    .mensaje(dataIncorrectaExcepcion.getMessage())
+                    .codigoEstado(HttpStatus.NOT_FOUND.value())
+                    .mensaje(noExisteEntidadExcepcion.getMessage())
                     .isCorrecto(false)
-                    .build(), HttpStatus.CONFLICT);
+                    .build(), HttpStatus.NOT_FOUND);
         }
     }
 
     @PutMapping(value = "documento/{id}", headers = "Accept=application/json")
     public ResponseEntity<?> actualizar(@PathVariable long id, @RequestBody TipoDocumentoDTO documento) {
         try {
-            return new ResponseEntity<>(documentoService.actualizar(id, documento.covertirDocumento()), HttpStatus.OK);
+            return new ResponseEntity<>(documentoService.actualizar(id, documento.covertirTipoDocumento()), HttpStatus.OK);
         } catch (EntidadInactivaExcepcion entidadInactivaExcepcion) {
             return new ResponseEntity<>(RespuestaBaseDTO.builder()
                     .codigoEstado(HttpStatus.CONFLICT.value())

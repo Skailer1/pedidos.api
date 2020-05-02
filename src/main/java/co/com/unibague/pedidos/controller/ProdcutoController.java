@@ -2,6 +2,7 @@ package co.com.unibague.pedidos.controller;
 
 import co.com.unibague.pedidos.model.Producto;
 import co.com.unibague.pedidos.response.BaseResponse;
+import co.com.unibague.pedidos.service.exception.NoExisteEntidadExcepcion;
 import co.com.unibague.pedidos.service.impl.IPedidoService;
 import co.com.unibague.pedidos.service.impl.IProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,14 @@ public class ProdcutoController
 
     @GetMapping(value = "producto", headers = "Accept=application/json")
     public ResponseEntity<?> listarTodos() {
-        return new ResponseEntity<>(productoService.listarTodos(), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(productoService.listarTodos(), HttpStatus.OK);
+        } catch (NoExisteEntidadExcepcion noExisteEntidadExcepcion) {
+            return new ResponseEntity<>(BaseResponse.builder()
+                    .isCorrecto(false)
+                    .mensaje(noExisteEntidadExcepcion.getMessage())
+                    .build(), HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping(value = "producto/{id}", headers = "Accept=application/json")

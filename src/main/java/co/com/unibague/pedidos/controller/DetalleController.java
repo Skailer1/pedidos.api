@@ -2,6 +2,7 @@ package co.com.unibague.pedidos.controller;
 
 import co.com.unibague.pedidos.model.DetallePedido;
 import co.com.unibague.pedidos.response.BaseResponse;
+import co.com.unibague.pedidos.service.exception.NoExisteEntidadExcepcion;
 import co.com.unibague.pedidos.service.impl.IDetalleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -44,7 +45,11 @@ public class DetalleController
 
     @GetMapping(value = "detallePedido", headers = "Accept=application/json")
     public ResponseEntity<?> listarTodos() {
-        return new ResponseEntity<>(detalleService.listarTodos(), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(detalleService.listarTodos(), HttpStatus.OK);
+        } catch (NoExisteEntidadExcepcion noExisteEntidadExcepcion) {
+            noExisteEntidadExcepcion.printStackTrace();
+        }
     }
 
     @GetMapping(value = "detallePedido/{id}", headers = "Accept=application/json")

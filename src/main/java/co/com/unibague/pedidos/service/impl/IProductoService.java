@@ -8,7 +8,7 @@ import co.com.unibague.pedidos.service.exception.YaExisteEntidadExcepcion;
 
 public interface IProductoService
 {
-    void crear(Producto producto) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion, YaExisteEntidadExcepcion;
+    Producto crear(Producto producto) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion, YaExisteEntidadExcepcion;
 
     void actualizar(Long id, Producto producto) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion;
 

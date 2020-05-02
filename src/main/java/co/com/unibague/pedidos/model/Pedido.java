@@ -1,5 +1,6 @@
 package co.com.unibague.pedidos.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,6 +28,7 @@ public class Pedido implements Serializable
     @Basic(optional = false)
     @Column(name = "fecha_pedido")
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
     private Date fechaPedido;
     @Basic(optional = false)
     @Column(name = "fecha_actualizacion")
