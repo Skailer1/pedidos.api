@@ -69,15 +69,6 @@ public class UsuarioService implements IUsuarioService
         return resultado;
     }
 
-    @Override
-    public List<Usuario> listarTodos() throws NoExisteEntidadExcepcion {
-        List<Usuario> usuarios = usuarioRepository.findByActivo(true);
-        if (usuarios.isEmpty()) {
-            throw new NoExisteEntidadExcepcion("No hay usuarios registrados");
-        } else {
-            return usuarios;
-        }
-    }
 
     @Override
     public Usuario buscarPorId(Long id) throws NoExisteEntidadExcepcion, EntidadInactivaExcepcion {

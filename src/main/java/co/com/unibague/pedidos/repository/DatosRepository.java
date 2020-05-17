@@ -9,7 +9,6 @@ import java.util.Optional;
 public interface DatosRepository extends CrudRepository<Datos, Long>
 {
     Optional<Datos> findById (Long id);
-    List<Datos> findByActivo(boolean isActivo);
-
 
 }
+//Los datos de conexión no han cambiado amigo? Donde se ponen aqui ?

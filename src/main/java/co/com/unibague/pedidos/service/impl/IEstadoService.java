@@ -9,13 +9,13 @@ import co.com.unibague.pedidos.service.exception.YaExisteEntidadExcepcion;
 public interface IEstadoService
 
 {
-    void crear(EstadoPedido estado) throws   DataIncorrectaExcepcion, YaExisteEntidadExcepcion;
+    //EstadoPedido crear(EstadoPedido estado) throws   DataIncorrectaExcepcion, YaExisteEntidadExcepcion;
 
-    void actualizar(Long id, EstadoPedido estado) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion;
+    //EstadoPedido actualizar(Long id, EstadoPedido estado) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion;
 
   //  boolean eliminar(Long id) throws NoExisteEntidadExcepcion, EntidadInactivaExcepcion;
 
-    Iterable<EstadoPedido> listarTodos()throws NoExisteEntidadExcepcion;
 
-    EstadoPedido buscarPorId(Long id) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion;
+
+ //   EstadoPedido buscarPorId(Long id) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion;
 }

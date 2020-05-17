@@ -2,15 +2,12 @@ package co.com.unibague.pedidos.service;
 
 import co.com.unibague.pedidos.model.TipoProducto;
 import co.com.unibague.pedidos.repository.TipoProductoRepository;
-import co.com.unibague.pedidos.service.exception.DataIncorrectaExcepcion;
 import co.com.unibague.pedidos.service.exception.EntidadInactivaExcepcion;
 import co.com.unibague.pedidos.service.exception.NoExisteEntidadExcepcion;
-import co.com.unibague.pedidos.service.exception.YaExisteEntidadExcepcion;
 import co.com.unibague.pedidos.service.impl.ITipoProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +17,7 @@ public class TipoProductoService implements ITipoProductoService
     @Autowired
     private TipoProductoRepository tipoProductoRepository;
 
-    @Override
+  /*  @Override
     public TipoProducto crear(TipoProducto tipoProducto) throws YaExisteEntidadExcepcion, DataIncorrectaExcepcion {
         if (!tipoProducto.sonCamposValidos()) {
             throw new DataIncorrectaExcepcion("Verifique la información enviada");
@@ -66,16 +63,16 @@ public class TipoProductoService implements ITipoProductoService
         }
         return resultado;
     }
-
-    @Override
-    public List<TipoProducto> listarTodos() throws NoExisteEntidadExcepcion {
-        List<TipoProducto> tipoProductos = tipoProductoRepository.findByActivo(true);
-        if (tipoProductos.isEmpty()) {
-            throw new NoExisteEntidadExcepcion("No hay tipoProductos registrados");
-        } else {
-            return tipoProductos;
-        }
-    }
+*/
+  @Override
+  public List<TipoProducto> listarTodos() throws NoExisteEntidadExcepcion {
+      List<TipoProducto> tipoProductos = tipoProductoRepository.findAll();
+      if (tipoProductos.isEmpty()) {
+          throw new NoExisteEntidadExcepcion("No hay tipoEmpleados registrados");
+      } else {
+          return tipoProductos;
+      }
+  }
 
     @Override
     public TipoProducto buscarPorId(Long id) throws NoExisteEntidadExcepcion, EntidadInactivaExcepcion {

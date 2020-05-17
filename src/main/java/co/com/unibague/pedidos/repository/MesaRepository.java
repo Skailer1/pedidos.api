@@ -10,5 +10,5 @@ public interface MesaRepository extends CrudRepository<Mesa, Long>
 {
     Optional<Mesa> findById (Long id);
 
-    List<Mesa> findByActivo(boolean isActivo);
+    List<Mesa> findAll();
 }

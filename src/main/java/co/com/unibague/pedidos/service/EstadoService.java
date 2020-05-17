@@ -3,17 +3,12 @@ package co.com.unibague.pedidos.service;
 
 import co.com.unibague.pedidos.model.EstadoPedido;
 import co.com.unibague.pedidos.repository.EstadoRepository;
-import co.com.unibague.pedidos.service.exception.DataIncorrectaExcepcion;
-import co.com.unibague.pedidos.service.exception.EntidadInactivaExcepcion;
 import co.com.unibague.pedidos.service.exception.NoExisteEntidadExcepcion;
-import co.com.unibague.pedidos.service.exception.YaExisteEntidadExcepcion;
 import co.com.unibague.pedidos.service.impl.IEstadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Service("estadoService")
 public class EstadoService implements IEstadoService
@@ -21,7 +16,7 @@ public class EstadoService implements IEstadoService
     @Autowired
     private EstadoRepository estadoRepository;
 
-    public EstadoPedido crear(EstadoPedido estado) throws YaExisteEntidadExcepcion, DataIncorrectaExcepcion {
+   /* public EstadoPedido crear(EstadoPedido estado) throws YaExisteEntidadExcepcion, DataIncorrectaExcepcion {
         if (!estado.sonCamposValidos()) {
             throw new DataIncorrectaExcepcion("Verifique la información enviada");
          } else if (estadoRepository.findById(estado.getId()).isPresent()) {
@@ -54,17 +49,9 @@ public class EstadoService implements IEstadoService
 
 
 
-    @Override
-    public List<EstadoPedido> listarTodos() throws NoExisteEntidadExcepcion {
-        List<EstadoPedido> estados = estadoRepository.findByActivo(true);
-        if (estados.isEmpty()) {
-            throw new NoExisteEntidadExcepcion("No hay estados registrados");
-        } else {
-            return estados;
-        }
-    }
+    */
 
-    @Override
+    /*@Override
     public EstadoPedido buscarPorId(Long id) throws NoExisteEntidadExcepcion, EntidadInactivaExcepcion {
         Optional<EstadoPedido> estadoPorId = estadoRepository.findById(id);
         if (!estadoPorId.isPresent()) {
@@ -78,6 +65,8 @@ public class EstadoService implements IEstadoService
         }
     }
 
+
+     */
 
 
 }

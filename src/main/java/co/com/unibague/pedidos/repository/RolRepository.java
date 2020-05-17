@@ -9,5 +9,4 @@ import java.util.Optional;
 public interface RolRepository extends CrudRepository<Rol, Long>
 {
     Optional<Rol> findById (Long id);
-    List<Rol> findByActivo(boolean isActivo);
 }

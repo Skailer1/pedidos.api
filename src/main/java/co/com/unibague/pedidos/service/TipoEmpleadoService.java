@@ -1,27 +1,23 @@
 package co.com.unibague.pedidos.service;
 
 import co.com.unibague.pedidos.model.TipoEmpleado;
-import co.com.unibague.pedidos.model.TipoProducto;
 import co.com.unibague.pedidos.repository.TipoEmpleadoRepository;
-import co.com.unibague.pedidos.service.exception.DataIncorrectaExcepcion;
 import co.com.unibague.pedidos.service.exception.EntidadInactivaExcepcion;
 import co.com.unibague.pedidos.service.exception.NoExisteEntidadExcepcion;
-import co.com.unibague.pedidos.service.exception.YaExisteEntidadExcepcion;
 import co.com.unibague.pedidos.service.impl.ITipoEmpleadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 @Service("tipoEmpeadoService")
-public class TipoEmpleadoService implements ITipoEmpleadoService
-{
+public class TipoEmpleadoService implements ITipoEmpleadoService {
     @Autowired
     private TipoEmpleadoRepository tipoEmpleadoRepository;
 
-    @Override
+  /*  @Override
     public TipoEmpleado crear(TipoEmpleado tipoEmpleado) throws YaExisteEntidadExcepcion, DataIncorrectaExcepcion {
         if (!tipoEmpleado.sonCamposValidos()) {
             throw new DataIncorrectaExcepcion("Verifique la información enviada");
@@ -68,9 +64,11 @@ public class TipoEmpleadoService implements ITipoEmpleadoService
         return resultado;
     }
 
+   */
+
     @Override
     public List<TipoEmpleado> listarTodos() throws NoExisteEntidadExcepcion {
-        List<TipoEmpleado> tipoEmpleados = tipoEmpleadoRepository.findByActivo(true);
+        List<TipoEmpleado> tipoEmpleados = tipoEmpleadoRepository.findAll();
         if (tipoEmpleados.isEmpty()) {
             throw new NoExisteEntidadExcepcion("No hay tipoEmpleados registrados");
         } else {
@@ -91,7 +89,6 @@ public class TipoEmpleadoService implements ITipoEmpleadoService
             return tipoEmpleadoBuscado;
         }
     }
-
 
 
 }

@@ -13,5 +13,6 @@ public interface EmpleadoRepository extends CrudRepository<Empleado, Long>
 {
     Optional<Empleado> findById (Long id);
 
+    Optional<Empleado> findByNumeroDocumentoAndTipoDocumento_Id(long numeroDocumento, long tipoDocumento);
 
 }

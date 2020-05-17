@@ -11,7 +11,5 @@ public interface IDatosService
 {
 
 
-    Iterable<Datos> listarTodos() throws NoExisteEntidadExcepcion;
-
-    Datos buscarPorId(Long id) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion;
+   Datos buscarPorId(Long id) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion;
 }

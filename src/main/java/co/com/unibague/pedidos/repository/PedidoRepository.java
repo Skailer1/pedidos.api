@@ -9,5 +9,4 @@ import java.util.Optional;
 public interface PedidoRepository extends CrudRepository<Pedido, Long>
 {
     Optional<Pedido> findById (Long id);
-    List<Pedido> findByActivo(boolean isActivo);
 }

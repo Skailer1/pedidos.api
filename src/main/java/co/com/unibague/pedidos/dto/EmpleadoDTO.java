@@ -1,5 +1,8 @@
 package co.com.unibague.pedidos.dto;
 
+import co.com.unibague.pedidos.enums.RH;
+import co.com.unibague.pedidos.enums.Sexo;
+import co.com.unibague.pedidos.enums.TipoDocumentoEnum;
 import co.com.unibague.pedidos.model.Empleado;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,8 +21,8 @@ public class EmpleadoDTO {
     private String nombre;
     private long telefono;
     private String correo;
-    private int rh;
-    private int sexo;
+    private RH rh;
+    private Sexo sexo;
     private long numeroDocumento;
     private String direccion;
     private boolean isActivo;

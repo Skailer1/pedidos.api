@@ -1,5 +1,7 @@
 package co.com.unibague.pedidos.controller;
 
+import co.com.unibague.pedidos.dto.RespuestaBaseDTO;
+import co.com.unibague.pedidos.service.exception.NoExisteEntidadExcepcion;
 import co.com.unibague.pedidos.service.impl.IMesaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,14 @@ public class MesaController
 
     @GetMapping(value = "mesa", headers = "Accept=application/json")
     public ResponseEntity<?> listarTodos() {
-        return new ResponseEntity<>(mesaService.listarTodos(), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(mesaService.listarTodos(), HttpStatus.OK);
+        } catch (NoExisteEntidadExcepcion noExisteEntidadExcepcion) {
+            return new ResponseEntity<>(RespuestaBaseDTO.builder()
+                    .codigoEstado(HttpStatus.NOT_FOUND.value())
+                    .mensaje(noExisteEntidadExcepcion.getMessage())
+                    .isCorrecto(false)
+                    .build(), HttpStatus.NOT_FOUND);
+        }
     }
 }

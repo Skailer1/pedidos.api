@@ -11,5 +11,5 @@ public interface ProductoRepository extends CrudRepository<Producto, Long>
 {
     Optional<Producto> findById (Long id);
 
-    List<Producto> findByActivo(boolean isActivo);
+    List<Producto> findAll();
 }

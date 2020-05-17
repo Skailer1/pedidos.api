@@ -1,6 +1,6 @@
 package co.com.unibague.pedidos.model;
 
-import co.com.unibague.pedidos.response.BaseResponse;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,14 +14,12 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "tipoDocumento", schema = "public")
-public class TipoDocumento extends BaseResponse implements Serializable {
+@Table(name = "tipo_documento", schema = "public")
+public class TipoDocumento  implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)

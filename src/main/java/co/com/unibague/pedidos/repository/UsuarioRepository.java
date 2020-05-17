@@ -9,5 +9,4 @@ import java.util.Optional;
 public interface UsuarioRepository extends CrudRepository<Usuario, Long>
 {
     Optional<Usuario> findById (Long id);
-    List<Usuario> findByActivo(boolean isActivo);
 }

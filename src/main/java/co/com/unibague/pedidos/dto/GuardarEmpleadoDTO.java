@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @Builder
 public class GuardarEmpleadoDTO {
 
-    private long tipoDocumentoId;
+    private long tipoDocumento;
     private long usuarioId;
-    private long tipoEmpleadoId;
+    private long tipoEmpleado;
     private EmpleadoDTO empleado;
 
 }

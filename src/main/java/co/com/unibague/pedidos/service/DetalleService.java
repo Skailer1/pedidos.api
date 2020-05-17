@@ -1,15 +1,15 @@
 package co.com.unibague.pedidos.service;
 
 import co.com.unibague.pedidos.model.DetallePedido;
-import co.com.unibague.pedidos.model.Empleado;
+import co.com.unibague.pedidos.model.DetallePedidoPK;
 import co.com.unibague.pedidos.repository.DetalleRepository;
-import co.com.unibague.pedidos.repository.EmpleadoRepository;
 import co.com.unibague.pedidos.service.exception.DataIncorrectaExcepcion;
 import co.com.unibague.pedidos.service.exception.EntidadInactivaExcepcion;
 import co.com.unibague.pedidos.service.exception.NoExisteEntidadExcepcion;
 import co.com.unibague.pedidos.service.exception.YaExisteEntidadExcepcion;
 import co.com.unibague.pedidos.service.impl.IDetalleService;
-import co.com.unibague.pedidos.service.impl.IEmpleadoService;
+import co.com.unibague.pedidos.service.impl.IPedidoService;
+import co.com.unibague.pedidos.service.impl.IProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,11 +24,16 @@ public class DetalleService implements IDetalleService
     private DetalleRepository detalleRepository;
 
     @Autowired
-    private EmpleadoRepository empleadoRepository;
+    private IProductoService productoService;
+    @Autowired
+    private IPedidoService pedidoService;
+
+
 
 
     @Override
     public DetallePedido crear(DetallePedido detalle) throws YaExisteEntidadExcepcion, DataIncorrectaExcepcion {
+
         if (!detalle.sonCamposValidos()) {
             throw new DataIncorrectaExcepcion("Verifique la información enviada");
          } else if (detalleRepository.findById(detalle.getDetallePedidoPK()).isPresent()) {
@@ -41,22 +46,24 @@ public class DetalleService implements IDetalleService
         }
     }
 
-    @Override
+    /*@Override
     public DetallePedido actualizar(Long id, DetallePedido detalle) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion {
         if (!detalle.sonCamposValidos()) {
             throw new DataIncorrectaExcepcion("Verifique la información enviada");
         } else {
             DetallePedido detalleBuscado = buscarPorId(id);
-            detalleBuscado.setDescripcionDocumento(detalle.getDescripcionDocumento());
+            detalleBuscado.setCantidad(detalle.getCantidad());
             detalleBuscado.setFechaActualizacion(new Date());
             return detalleRepository.save(detalleBuscado);
         }
     }
 
+     */
+
     @Override
-    public boolean eliminar(Long id) throws NoExisteEntidadExcepcion, EntidadInactivaExcepcion {
+    public boolean eliminar(DetallePedidoPK detallePedidoPK) throws NoExisteEntidadExcepcion, EntidadInactivaExcepcion {
         boolean resultado = false;
-        DetallePedido detallePorId = buscarPorId(id);
+        DetallePedido detallePorId = buscarPorId(detallePedidoPK);
         if (detallePorId != null) {
             detallePorId.setActivo(false);
             detallePorId.setFechaActualizacion(new Date());
@@ -66,19 +73,10 @@ public class DetalleService implements IDetalleService
         return resultado;
     }
 
-    @Override
-    public List<DetallePedido> listarTodos() throws NoExisteEntidadExcepcion {
-        List<DetallePedido> detalles = detalleRepository.findByActivo(true);
-        if (detalles.isEmpty()) {
-            throw new NoExisteEntidadExcepcion("No hay tipoDocumentos registrados");
-        } else {
-            return detalles;
-        }
-    }
 
     @Override
-    public DetallePedido buscarPorId(Long id) throws NoExisteEntidadExcepcion, EntidadInactivaExcepcion {
-        Optional<DetallePedido> detallePorId = detalleRepository.findById(id);
+    public DetallePedido buscarPorId(DetallePedidoPK detallePedidoPK) throws NoExisteEntidadExcepcion, EntidadInactivaExcepcion {
+        Optional<DetallePedido> detallePorId = detalleRepository.findById(detallePedidoPK);
         if (!detallePorId.isPresent()) {
             throw new NoExisteEntidadExcepcion("No existe un detalle con ese id");
         }

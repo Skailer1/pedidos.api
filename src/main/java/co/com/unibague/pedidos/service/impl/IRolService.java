@@ -8,13 +8,11 @@ import co.com.unibague.pedidos.service.exception.YaExisteEntidadExcepcion;
 
 public interface IRolService
 {
-    void crear(Rol rol) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion, YaExisteEntidadExcepcion;
+    Rol crear(Rol rol) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion, YaExisteEntidadExcepcion;
 
-    void actualizar(Long id, Rol rol) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion;
+    Rol actualizar(Long id, Rol rol) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion;
 
     boolean eliminar(Long id) throws NoExisteEntidadExcepcion, EntidadInactivaExcepcion;
-
-    Iterable<Rol> listarTodos()throws NoExisteEntidadExcepcion;
 
     Rol buscarPorId(Long id) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion;
 }

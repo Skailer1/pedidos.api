@@ -7,15 +7,17 @@ import co.com.unibague.pedidos.service.exception.EntidadInactivaExcepcion;
 import co.com.unibague.pedidos.service.exception.NoExisteEntidadExcepcion;
 import co.com.unibague.pedidos.service.exception.YaExisteEntidadExcepcion;
 
+import java.util.List;
+
 public interface ITipoProductoService
 {
-    void crear(TipoProducto TipoProducto) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion, YaExisteEntidadExcepcion;
+   // TipoProducto crear(TipoProducto TipoProducto) throws  DataIncorrectaExcepcion, YaExisteEntidadExcepcion;
 
-    void actualizar(Long id, TipoProducto TpProducto) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion;
+    //TipoProducto actualizar(Long id, TipoProducto TpProducto) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion;
 
-    boolean eliminar(Long id) throws NoExisteEntidadExcepcion, EntidadInactivaExcepcion;
+    //boolean eliminar(Long id) throws NoExisteEntidadExcepcion, EntidadInactivaExcepcion;
 
-    Iterable<TipoProducto> listarTodos()throws NoExisteEntidadExcepcion;
+    List<TipoProducto> listarTodos()throws NoExisteEntidadExcepcion;
 
     TipoProducto buscarPorId(Long id) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion;
 }

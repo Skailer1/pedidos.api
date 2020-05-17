@@ -23,12 +23,13 @@ public class EstadoPedido implements Serializable
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
-    @Basic(optional = false)
+    @Enumerated(EnumType.ORDINAL)
     @Column(name = "descripcion_estado")
-    private int descripcionEstado;
+    private DescripcionEstado descripcionEstado = DescripcionEstado.VACIO;
     @Basic(optional = false)
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
@@ -41,9 +42,9 @@ public class EstadoPedido implements Serializable
     @Column(name = "is_activo")
     private boolean isActivo;
   /*  @OneToMany(cascade = CascadeType.ALL, mappedBy = "estadoPedido")
-    private List<EstadoPorPedido> estadoPorPedidoList; */
+    private List<EstadoPorPedidoRepository> estadoPorPedidoList; */
 
     public boolean sonCamposValidos() {
-        return descripcionEstado >0;
+        return descripcionEstado != DescripcionEstado.VACIO ;
     }
 }

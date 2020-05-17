@@ -68,15 +68,6 @@ public class RolService implements IRolService
         return resultado;
     }
 
-    @Override
-    public List<Rol> listarTodos() throws NoExisteEntidadExcepcion {
-        List<Rol> roles = rolRepository.findByActivo(true);
-        if (roles.isEmpty()) {
-            throw new NoExisteEntidadExcepcion("No hay roles registrados");
-        } else {
-            return roles;
-        }
-    }
 
     @Override
     public Rol buscarPorId(Long id) throws NoExisteEntidadExcepcion, EntidadInactivaExcepcion {

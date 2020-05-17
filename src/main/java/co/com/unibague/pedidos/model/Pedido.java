@@ -22,6 +22,7 @@ public class Pedido implements Serializable
 {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
@@ -41,18 +42,21 @@ public class Pedido implements Serializable
     @Basic(optional = false)
     @Column(name = "is_activo")
     private boolean isActivo;
-  /*  @OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
-    private Pago pago;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido")
-    private List<DetallePedido> detallePedidoList;
     @JoinColumn(name = "empleado_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Empleado empleadoId;
     @JoinColumn(name = "mesa_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Mesa mesaId;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "pedidoId")
+    private Pago pago;
+
+  /*
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido")
-    private List<EstadoPorPedido> estadoPorPedidoList; */
+    private List<DetallePedido> detallePedidoList;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido")
+    private List<EstadoPorPedidoRepository> estadoPorPedidoList; */
 
     public boolean sonCamposValidos() {
         return fechaPedido != null ;

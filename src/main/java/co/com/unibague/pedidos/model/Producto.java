@@ -47,9 +47,13 @@ public class Producto implements Serializable
     @Basic(optional = false)
     @Column(name = "iva")
     private double iva;
-  /*  @JoinColumn(name = "tipo_producto", referencedColumnName = "id")
+    @JoinColumn(name = "tipo_producto", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private TipoProducto tipoProducto;
+    //ess por la foranea?
+
+
+  /*
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "producto")
     private List<DetallePedido> detallePedidoList; */
 

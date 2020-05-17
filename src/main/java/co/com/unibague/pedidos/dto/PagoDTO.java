@@ -1,6 +1,7 @@
 package co.com.unibague.pedidos.dto;
 import co.com.unibague.pedidos.enums.TipoPago;
 import co.com.unibague.pedidos.model.Pago;
+import co.com.unibague.pedidos.model.Pedido;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,7 +15,7 @@ import java.util.Date;
 @Builder
 public class PagoDTO
 {
-    private long pedidoId;
+    private Long id;
     private TipoPago tipoPago;
     private double total;
     private boolean isActivo;
@@ -23,7 +24,7 @@ public class PagoDTO
 
     public Pago covertirPago() {
         return Pago.builder()
-                .pedidoId(pedidoId)
+                .id(id)
                 .tipoPago(tipoPago)
                 .totalPago(total)
                 .isActivo(isActivo)

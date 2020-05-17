@@ -20,14 +20,14 @@ public class Pago implements Serializable
 {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "pedido_id")
-    private Long pedidoId;
+    @Column(name = "id")
+    private Long id;
     @Basic(optional = false)
     @Column(name = "total_pago")
     private double totalPago;
-    @Enumerated
-    @Basic(optional = false)
+    @Enumerated(EnumType.ORDINAL)
     @Column(name = "tipo_pago")
     private TipoPago tipoPago;
     @Basic(optional = false)
@@ -41,7 +41,7 @@ public class Pago implements Serializable
     @Basic(optional = false)
     @Column(name = "is_activo")
     private boolean isActivo;
-    /* @JoinColumn(name = "datos_id", referencedColumnName = "id")
+     @JoinColumn(name = "datos_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Datos datosId;
     @JoinColumn(name = "empleado_id", referencedColumnName = "id")
@@ -49,7 +49,8 @@ public class Pago implements Serializable
     private Empleado empleadoId;
     @JoinColumn(name = "pedido_id", referencedColumnName = "id", insertable = false, updatable = false)
     @OneToOne(optional = false)
-    private Pedido pedido; */
+    private Pedido pedidoId;
+
 
     public boolean sonCamposValidos() {
         return totalPago >0 &&

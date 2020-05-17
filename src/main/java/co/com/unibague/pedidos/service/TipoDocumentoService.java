@@ -64,9 +64,9 @@ public class TipoDocumentoService implements ITipoDocumentoService {
 
     @Override
     public List<TipoDocumento> listarTodos() throws NoExisteEntidadExcepcion {
-        List<TipoDocumento> tipoDocumentos = tipoDocumentoRepository.findByActivo(true);
+        List<TipoDocumento> tipoDocumentos = tipoDocumentoRepository.findAll();
         if (tipoDocumentos.isEmpty()) {
-            throw new NoExisteEntidadExcepcion("No hay tipoDocumentos registrados");
+            throw new NoExisteEntidadExcepcion("No hay tipo documentos registrados");
         } else {
             return tipoDocumentos;
         }

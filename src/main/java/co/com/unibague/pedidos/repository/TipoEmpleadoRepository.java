@@ -9,5 +9,7 @@ import java.util.Optional;
 public interface TipoEmpleadoRepository extends CrudRepository<TipoEmpleado, Long>
 {
     Optional<TipoEmpleado> findById (Long id);
-    List<TipoEmpleado> findByActivo(boolean isActivo);
+    List<TipoEmpleado> findAll();
 }
+
+

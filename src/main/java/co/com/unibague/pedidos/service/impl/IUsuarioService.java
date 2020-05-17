@@ -8,13 +8,13 @@ import co.com.unibague.pedidos.service.exception.YaExisteEntidadExcepcion;
 
 public interface IUsuarioService
 {
-    void crear(Usuario usuario) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion, YaExisteEntidadExcepcion;
+    Usuario crear(Usuario usuario) throws DataIncorrectaExcepcion, YaExisteEntidadExcepcion;
 
-    void actualizar(Long id, Usuario usuario) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion;
+    Usuario actualizar(Long id, Usuario usuario) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion;
 
     boolean eliminar(Long id) throws NoExisteEntidadExcepcion, EntidadInactivaExcepcion;
 
-    Iterable<Usuario> listarTodos() throws NoExisteEntidadExcepcion;;
+
 
     Usuario buscarPorId(Long id) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion;
 }

@@ -1,11 +1,16 @@
 package co.com.unibague.pedidos.service;
 
+import co.com.unibague.pedidos.dto.GuardarPedidoDTO;
+import co.com.unibague.pedidos.model.Empleado;
+import co.com.unibague.pedidos.model.Mesa;
 import co.com.unibague.pedidos.model.Pedido;
 import co.com.unibague.pedidos.repository.PedidoRepository;
 import co.com.unibague.pedidos.service.exception.DataIncorrectaExcepcion;
 import co.com.unibague.pedidos.service.exception.EntidadInactivaExcepcion;
 import co.com.unibague.pedidos.service.exception.NoExisteEntidadExcepcion;
 import co.com.unibague.pedidos.service.exception.YaExisteEntidadExcepcion;
+import co.com.unibague.pedidos.service.impl.IEmpleadoService;
+import co.com.unibague.pedidos.service.impl.IMesaService;
 import co.com.unibague.pedidos.service.impl.IPedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +24,19 @@ public class PedidoService implements IPedidoService
 {
     @Autowired
     private PedidoRepository pedidoRepository;
+    @Autowired
+    private IEmpleadoService empleadoService;
+    @Autowired
+    private IMesaService mesaService;
+
 
     @Override
-    public Pedido crear(Pedido pedido) throws YaExisteEntidadExcepcion, DataIncorrectaExcepcion {
+    public Pedido crear(GuardarPedidoDTO guardarPedido) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, YaExisteEntidadExcepcion, DataIncorrectaExcepcion {
+        Pedido pedido = guardarPedido.getPedido().covertirPedido();
+        Empleado empleadoPorId = empleadoService.buscarPorId(guardarPedido.getEmpleadoId());
+        pedido.setEmpleadoId(empleadoPorId);
+        Mesa mesaPorId = mesaService.buscarPorId(guardarPedido.getMesaId());
+        pedido.setMesaId(mesaPorId);
         if (!pedido.sonCamposValidos()) {
             throw new DataIncorrectaExcepcion("Verifique la información enviada");
            } else if (pedidoRepository.findById(pedido.getId()).isPresent()) {
@@ -68,15 +83,7 @@ public class PedidoService implements IPedidoService
         return resultado;
     }
 
-    @Override
-    public List<Pedido> listarTodos() throws NoExisteEntidadExcepcion {
-        List<Pedido> pedidos = pedidoRepository.findByActivo(true);
-        if (pedidos.isEmpty()) {
-            throw new NoExisteEntidadExcepcion("No hay pedidos registrados");
-        } else {
-            return pedidos;
-        }
-    }
+
 
     @Override
     public Pedido buscarPorId(Long id) throws NoExisteEntidadExcepcion, EntidadInactivaExcepcion {

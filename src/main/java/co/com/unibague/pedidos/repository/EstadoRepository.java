@@ -7,8 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 import java.util.Optional;
 
-public interface EstadoRepository extends CrudRepository<EstadoPedido, Long>
-{
-        Optional<EstadoPedido> findById (Long id);
-        List<EstadoPedido> findByActivo(boolean isActivo);
+public interface EstadoRepository extends CrudRepository<EstadoPedido, Long> {
+    Optional<EstadoPedido> findById(Long id);
 }

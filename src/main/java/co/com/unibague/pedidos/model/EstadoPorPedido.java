@@ -1,5 +1,7 @@
 package co.com.unibague.pedidos.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.io.Serializable;
 import java.util.Date;
@@ -24,6 +26,7 @@ public class EstadoPorPedido implements Serializable
     @Basic(optional = false)
     @Column(name = "fecha_estado")
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
     private Date fechaEstado;
     @Basic(optional = false)
     @Column(name = "fecha_creacion")
@@ -36,12 +39,12 @@ public class EstadoPorPedido implements Serializable
     @Basic(optional = false)
     @Column(name = "is_activo")
     private boolean isActivo;
-  /*  @JoinColumn(name = "estado_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "estado_id", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private EstadoPedido estadoPedido;
     @JoinColumn(name = "pedido_id", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private Pedido pedido; */
+    private Pedido pedido;
 
     public boolean sonCamposValidos() {
         return fechaEstado != null;

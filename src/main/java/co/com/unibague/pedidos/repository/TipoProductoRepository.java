@@ -9,5 +9,4 @@ import java.util.Optional;
 public interface TipoProductoRepository extends CrudRepository<TipoProducto, Long>
 {
     Optional<TipoProducto> findById (Long id);
-    List<TipoProducto> findByActivo(boolean isActivo);
-}
+    List<TipoProducto> findAll();}

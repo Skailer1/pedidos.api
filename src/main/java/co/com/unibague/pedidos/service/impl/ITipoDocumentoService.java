@@ -6,6 +6,8 @@ import co.com.unibague.pedidos.service.exception.EntidadInactivaExcepcion;
 import co.com.unibague.pedidos.service.exception.NoExisteEntidadExcepcion;
 import co.com.unibague.pedidos.service.exception.YaExisteEntidadExcepcion;
 
+import java.util.List;
+
 public interface ITipoDocumentoService {
 
     TipoDocumento crear(TipoDocumento tipoDocumento) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion, YaExisteEntidadExcepcion;
@@ -14,7 +16,7 @@ public interface ITipoDocumentoService {
 
     boolean eliminar(Long id) throws NoExisteEntidadExcepcion, EntidadInactivaExcepcion;
 
-    Iterable<TipoDocumento> listarTodos() throws NoExisteEntidadExcepcion;
+    List<TipoDocumento> listarTodos() throws NoExisteEntidadExcepcion;
 
     TipoDocumento buscarPorId(Long id) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion;
 

@@ -9,10 +9,10 @@ public enum DescripcionEstado
     VACIO("-"),
     @JsonProperty("CREADO")
     CREADO("CREADO"),
-    @JsonProperty("EN COCINA")
-    EN_COCINA("EN COCINA"),
-    @JsonProperty("EN PREPARACION")
-    EN_PREPARACION("EN PREPARACION"),
+    @JsonProperty("COCINA")
+    EN_COCINA("COCINA"),
+    @JsonProperty("PREPARACION")
+    EN_PREPARACION("PREPARACION"),
     @JsonProperty("ENTREGADO")
     ENTREGRADO("ENTREGADO");
 

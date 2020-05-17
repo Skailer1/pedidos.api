@@ -13,10 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class DetallePedidoDTO
-
-{
-    private Long id;
+public class DetallePedidoDTO {
     private int cantidad;
     private double valorUnitario;
     private double total;
@@ -35,8 +32,6 @@ public class DetallePedidoDTO
                 .fechaActualizacion(new Date())
                 .build();
     }
-
-
 
 
 }

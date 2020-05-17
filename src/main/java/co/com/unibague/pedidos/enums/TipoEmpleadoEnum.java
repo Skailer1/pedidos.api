@@ -3,21 +3,21 @@ package co.com.unibague.pedidos.enums;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
-public enum Sexo
+public enum TipoEmpleadoEnum
 {
     @JsonProperty("-")
     VACIO("-"),
-    @JsonProperty("M")
-    MASCULINO("M"),
-    @JsonProperty("F")
-    FEMENINO("F"),
-    @JsonProperty("O")
-    OTRO("O"),;
+    @JsonProperty("MESERO")
+    MESERO("MESERO"),
+    @JsonProperty("COCINERO")
+    COCINERO("COCINERO"),
+    @JsonProperty("CAJA")
+    CAJA("CAJA");
 
     @Getter
     private String name;
 
-    Sexo(String name) {
+    TipoEmpleadoEnum(String name) {
         this.name = name;
     }
 }
