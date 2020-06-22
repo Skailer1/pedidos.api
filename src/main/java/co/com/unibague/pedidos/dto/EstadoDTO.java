@@ -24,6 +24,7 @@ public class EstadoDTO
     public EstadoPedido covertirEstado() {
         return EstadoPedido.builder()
                 .id(id)
+                .descripcionEstado(descripcionEstado)
                 .isActivo(isActivo)
                 .fechaActualizacion(new Date())
                 .build();

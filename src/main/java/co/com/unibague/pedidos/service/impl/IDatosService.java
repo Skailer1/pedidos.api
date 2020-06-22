@@ -7,8 +7,11 @@ import co.com.unibague.pedidos.service.exception.EntidadInactivaExcepcion;
 import co.com.unibague.pedidos.service.exception.NoExisteEntidadExcepcion;
 import co.com.unibague.pedidos.service.exception.YaExisteEntidadExcepcion;
 
+import java.util.List;
+
 public interface IDatosService
 {
+   List<Datos> listarTodos() throws NoExisteEntidadExcepcion;
 
 
    Datos buscarPorId(Long id) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion;

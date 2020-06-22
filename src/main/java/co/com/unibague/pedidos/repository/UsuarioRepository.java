@@ -9,4 +9,10 @@ import java.util.Optional;
 public interface UsuarioRepository extends CrudRepository<Usuario, Long>
 {
     Optional<Usuario> findById (Long id);
+
+    Optional<Usuario> findByCorreo(String correo);
+
+    Optional<Usuario> findByCorreoAndContrasenia(String correo, String contrasenia);
 }
+
+

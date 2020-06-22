@@ -13,13 +13,12 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class PedidoDTO
-{
+public class PedidoDTO {
     private Long id;
-    private Date fechaPedido;
-    private boolean isActivo;
-    private Date fechaCreacion;
-    private Date fechaActualizacion;
+    private Date fechaPedido = new Date();
+    private boolean isActivo = true;
+    private Date fechaCreacion = new Date();
+    private Date fechaActualizacion = new Date();
 
     public Pedido covertirPedido() {
         return Pedido.builder()

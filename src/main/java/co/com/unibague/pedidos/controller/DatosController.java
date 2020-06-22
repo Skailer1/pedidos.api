@@ -17,10 +17,22 @@ import org.springframework.web.bind.annotation.RestController;
 public class DatosController
 {
 
-    // LO QUE MAS ME HA PUESTO PROBLEMA ES EL SERVICIO ESTE DE DATO
     @Autowired
     private IDatosService datosService;
 
+
+    @GetMapping(value = "datos", headers = "Accept=application/json")
+    public ResponseEntity<?> listarTodos() {
+        try {
+            return new ResponseEntity<>(datosService.listarTodos(), HttpStatus.OK);
+        } catch (NoExisteEntidadExcepcion noExisteEntidadExcepcion) {
+            return new ResponseEntity<>(RespuestaBaseDTO.builder()
+                    .codigoEstado(HttpStatus.NOT_FOUND.value())
+                    .mensaje(noExisteEntidadExcepcion.getMessage())
+                    .isCorrecto(false)
+                    .build(), HttpStatus.NOT_FOUND);
+        }
+    }
 
 
     @GetMapping(value = "datos/{id}", headers = "Accept=application/json")

@@ -23,7 +23,7 @@ public class DetallePedidoDTO {
     private Date fechaCreacion;
     private Date fechaActualizacion;
 
-    public DetallePedido covertirDatos() {
+    public DetallePedido covertirDetalle() {
         return DetallePedido.builder()
                 .cantidad(cantidad)
                 .valorUnitario(valorUnitario)

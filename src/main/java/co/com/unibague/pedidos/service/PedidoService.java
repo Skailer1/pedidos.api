@@ -1,6 +1,8 @@
 package co.com.unibague.pedidos.service;
 
 import co.com.unibague.pedidos.dto.GuardarPedidoDTO;
+import co.com.unibague.pedidos.dto.PedidoDTO;
+import co.com.unibague.pedidos.model.Datos;
 import co.com.unibague.pedidos.model.Empleado;
 import co.com.unibague.pedidos.model.Mesa;
 import co.com.unibague.pedidos.model.Pedido;
@@ -32,16 +34,18 @@ public class PedidoService implements IPedidoService
 
     @Override
     public Pedido crear(GuardarPedidoDTO guardarPedido) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, YaExisteEntidadExcepcion, DataIncorrectaExcepcion {
+        guardarPedido.setPedido(new PedidoDTO());
         Pedido pedido = guardarPedido.getPedido().covertirPedido();
         Empleado empleadoPorId = empleadoService.buscarPorId(guardarPedido.getEmpleadoId());
         pedido.setEmpleadoId(empleadoPorId);
         Mesa mesaPorId = mesaService.buscarPorId(guardarPedido.getMesaId());
         pedido.setMesaId(mesaPorId);
-        if (!pedido.sonCamposValidos()) {
+       if (!pedido.sonCamposValidos()) {
             throw new DataIncorrectaExcepcion("Verifique la información enviada");
-           } else if (pedidoRepository.findById(pedido.getId()).isPresent()) {
+           }  if (pedidoRepository.findByFechaPedido(pedido.getFechaPedido()).isPresent()) {
             throw new YaExisteEntidadExcepcion("Ya existe un pedido con ese id");
         } else {
+            pedido.setFechaPedido(new Date());
             pedido.setFechaCreacion(new Date());
             pedido.setFechaActualizacion(new Date());
             pedido.setActivo(true);
@@ -49,11 +53,11 @@ public class PedidoService implements IPedidoService
         }
     }
 
-    @Override
+ /*   @Override
     public Pedido actualizar(Long id, Pedido pedido) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion {
         if (!pedido.sonCamposValidos()) {
             throw new DataIncorrectaExcepcion("Verifique la información enviada");
-        } else if (!pedidoRepository.findById(id).isPresent()) {
+        }  if (!pedidoRepository.findById(id).isPresent()) {
             throw new NoExisteEntidadExcepcion("No existe un pedido con ese id");
         } else if (!pedidoRepository.findById(id).get().isActivo()) {
             throw new EntidadInactivaExcepcion("El pedido que se desea actualizar esta inactivo");
@@ -65,6 +69,9 @@ public class PedidoService implements IPedidoService
             return pedidoRepository.save(pedido);
         }
     }
+
+  */
+
 
     @Override
     public boolean eliminar(Long id) throws NoExisteEntidadExcepcion, EntidadInactivaExcepcion {
@@ -83,7 +90,15 @@ public class PedidoService implements IPedidoService
         return resultado;
     }
 
-
+    public List<Pedido> listarTodos() throws NoExisteEntidadExcepcion {
+        List<Pedido> pedidos = (List<Pedido>) pedidoRepository.findAll();
+        if (pedidos.isEmpty()) {
+            throw new NoExisteEntidadExcepcion("No hay mesas registradas");
+        }
+        else {
+            return pedidos;
+        }
+    }
 
     @Override
     public Pedido buscarPorId(Long id) throws NoExisteEntidadExcepcion, EntidadInactivaExcepcion {

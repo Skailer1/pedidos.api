@@ -21,6 +21,7 @@ public class ProductoDTO
     private Date fechaCreación;
     private Date fechaActualizacion;
     private String nombreProducto;
+    private String fotoProducto;
     private double iva;
     private Boolean isActivo;
 
@@ -30,6 +31,7 @@ public class ProductoDTO
                 .cantidadEnStock(cantidadEnStock)
                 .costo(costo)
                 .nombreProducto(nombreProducto)
+                .fotoProducto(fotoProducto)
                 .iva(iva)
                 .isActivo(isActivo)
                 .fechaActualizacion(new Date())

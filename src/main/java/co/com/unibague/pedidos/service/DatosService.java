@@ -18,7 +18,15 @@ public class DatosService implements IDatosService
     @Autowired
     private DatosRepository datosRepository;
 
-
+    @Override
+    public List<Datos> listarTodos() throws NoExisteEntidadExcepcion {
+        List<Datos> datos = (List<Datos>) datosRepository.findAll();
+        if (datos.isEmpty()) {
+            throw new NoExisteEntidadExcepcion("No hay datos registrados");
+        } else {
+            return datos;
+        }
+    }
 
     @Override
     public Datos buscarPorId(Long id) throws NoExisteEntidadExcepcion, EntidadInactivaExcepcion {
