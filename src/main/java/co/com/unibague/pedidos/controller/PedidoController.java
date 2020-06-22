@@ -39,7 +39,8 @@ public class PedidoController {
                     .build(), HttpStatus.NOT_FOUND);
         }
     }
-    @PutMapping(value = "pedido/{id}", headers = "Accept=application/json")
+
+   /* @PutMapping(value = "pedido/{id}", headers = "Accept=application/json")
     public ResponseEntity<?> actualizar(@PathVariable long id, @RequestBody PedidoDTO pedido) {
         try {
             return new ResponseEntity<>(pedidoService.actualizar(id, pedido.covertirPedido()), HttpStatus.OK);
@@ -62,6 +63,20 @@ public class PedidoController {
                     .build(), HttpStatus.CONFLICT);
         }
     }
+
+    */
+   @GetMapping(value = "pedido", headers = "Accept=application/json")
+   public ResponseEntity<?> listarTodos() {
+       try {
+           return new ResponseEntity<>(pedidoService.listarTodos(), HttpStatus.OK);
+       } catch (NoExisteEntidadExcepcion noExisteEntidadExcepcion) {
+           return new ResponseEntity<>(RespuestaBaseDTO.builder()
+                   .codigoEstado(HttpStatus.NOT_FOUND.value())
+                   .mensaje(noExisteEntidadExcepcion.getMessage())
+                   .isCorrecto(false)
+                   .build(), HttpStatus.NOT_FOUND);
+       }
+   }
 
 
 

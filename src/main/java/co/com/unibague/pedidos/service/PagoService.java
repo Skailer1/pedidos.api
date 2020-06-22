@@ -29,8 +29,10 @@ public class PagoService implements IPagoService {
         private PagoRepository pagoRepository;
         @Autowired
         private IEmpleadoService empleadoService;
-        @Autowired
+ /*       @Autowired
         private IPedidoService pedidoService;
+
+  */
         @Autowired
         private IDatosService datosService;
 
@@ -41,8 +43,10 @@ public class PagoService implements IPagoService {
         Pago pago = guardarPago.getPago().covertirPago();
         Empleado empleadoPorId = empleadoService.buscarPorId(guardarPago.getEmpleadoId());
         pago.setEmpleadoId(empleadoPorId);
-        Pedido pedidoPorId = pedidoService.buscarPorId(guardarPago.getPedidoId());
+       /* Pedido pedidoPorId = pedidoService.buscarPorId(guardarPago.g());
         pago.setPedidoId(pedidoPorId);
+
+        */
         Datos datosPorId = datosService.buscarPorId(guardarPago.getDatosId()) ;
         pago.setDatosId(datosPorId);
         if (!pago.sonCamposValidos()) {

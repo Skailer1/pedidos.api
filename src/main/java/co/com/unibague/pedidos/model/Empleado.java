@@ -76,7 +76,7 @@ public class Empleado implements Serializable {
    /* @OneToMany(cascade = CascadeType.ALL, mappedBy = "empleadoId")
     private List<Pedido> pedidoList;*/
 
-    public boolean sonCamposValidos() {  //agregar el id en este metodo ? no amigo, ya sé cómo arreglarolo
+    public boolean sonCamposValidos() {
         return nombre != null &&
                 direccion != null &&
                 telefono > 0 &&

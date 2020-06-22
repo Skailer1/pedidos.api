@@ -22,7 +22,7 @@ public class MesaService implements IMesaService
     public List<Mesa> listarTodos() throws NoExisteEntidadExcepcion {
         List<Mesa> mesas = mesaRepository.findAll();
         if (mesas.isEmpty()) {
-            throw new NoExisteEntidadExcepcion("No hay tipoEmpleados registrados");
+            throw new NoExisteEntidadExcepcion("No hay mesas registradas");
         } else {
             return mesas;
         }

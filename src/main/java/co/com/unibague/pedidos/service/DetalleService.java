@@ -1,7 +1,9 @@
 package co.com.unibague.pedidos.service;
 
+import co.com.unibague.pedidos.dto.GuardarDetalleDTO;
 import co.com.unibague.pedidos.model.DetallePedido;
 import co.com.unibague.pedidos.model.DetallePedidoPK;
+import co.com.unibague.pedidos.model.Pedido;
 import co.com.unibague.pedidos.repository.DetalleRepository;
 import co.com.unibague.pedidos.service.exception.DataIncorrectaExcepcion;
 import co.com.unibague.pedidos.service.exception.EntidadInactivaExcepcion;
@@ -31,9 +33,12 @@ public class DetalleService implements IDetalleService
 
 
 
+    /*
     @Override
-    public DetallePedido crear(DetallePedido detalle) throws YaExisteEntidadExcepcion, DataIncorrectaExcepcion {
-
+    public DetallePedido crear(GuardarDetalleDTO detalle) throws YaExisteEntidadExcepcion, DataIncorrectaExcepcion {
+        DetallePedido detallePedido = detalle.getDetalle().covertirDetalle();
+        Pedido pedidoPorId = pedidoService.buscarPorId(detalle.getPedidoId());
+        detallePedido.
         if (!detalle.sonCamposValidos()) {
             throw new DataIncorrectaExcepcion("Verifique la información enviada");
          } else if (detalleRepository.findById(detalle.getDetallePedidoPK()).isPresent()) {
@@ -46,6 +51,8 @@ public class DetalleService implements IDetalleService
         }
     }
 
+
+     */
     /*@Override
     public DetallePedido actualizar(Long id, DetallePedido detalle) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion {
         if (!detalle.sonCamposValidos()) {

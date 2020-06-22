@@ -29,7 +29,7 @@ public class Pedido implements Serializable
     @Basic(optional = false)
     @Column(name = "fecha_pedido")
     @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
+   // @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
     private Date fechaPedido;
     @Basic(optional = false)
     @Column(name = "fecha_actualizacion")
@@ -48,8 +48,13 @@ public class Pedido implements Serializable
     @JoinColumn(name = "mesa_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Mesa mesaId;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "pedidoId")
+    @JoinColumn(name = "estado_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private EstadoPedido estadoId;
+   /* @OneToOne(cascade = CascadeType.ALL, mappedBy = "pedidoId")
     private Pago pago;
+
+    */
 
   /*
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido")
@@ -61,5 +66,7 @@ public class Pedido implements Serializable
     public boolean sonCamposValidos() {
         return fechaPedido != null ;
     }
+
+
 
 }

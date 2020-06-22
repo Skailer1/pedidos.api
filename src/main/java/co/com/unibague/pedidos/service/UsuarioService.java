@@ -1,5 +1,6 @@
 package co.com.unibague.pedidos.service;
 
+import co.com.unibague.pedidos.dto.CambiarContraseniaDTO;
 import co.com.unibague.pedidos.model.Usuario;
 import co.com.unibague.pedidos.repository.UsuarioRepository;
 import co.com.unibague.pedidos.service.exception.DataIncorrectaExcepcion;
@@ -7,16 +8,15 @@ import co.com.unibague.pedidos.service.exception.EntidadInactivaExcepcion;
 import co.com.unibague.pedidos.service.exception.NoExisteEntidadExcepcion;
 import co.com.unibague.pedidos.service.exception.YaExisteEntidadExcepcion;
 import co.com.unibague.pedidos.service.impl.IUsuarioService;
+import co.com.unibague.pedidos.util.ValidacionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 @Service("usuarioService")
-public class UsuarioService implements IUsuarioService
-{
+public class UsuarioService implements IUsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
@@ -24,8 +24,8 @@ public class UsuarioService implements IUsuarioService
     public Usuario crear(Usuario usuario) throws YaExisteEntidadExcepcion, DataIncorrectaExcepcion {
         if (!usuario.sonCamposValidos()) {
             throw new DataIncorrectaExcepcion("Verifique la información enviada");
-         } else if (usuarioRepository.findById(usuario.getId()).isPresent()) {
-            throw new YaExisteEntidadExcepcion("Ya existe un ususario con ese id");
+        } else if (usuarioRepository.findByCorreo(usuario.getCorreo()).isPresent()) {
+            throw new YaExisteEntidadExcepcion("Ya existe un ususario con ese correo");
         } else {
             usuario.setFechaCreacion(new Date());
             usuario.setFechaActualizacion(new Date());
@@ -46,7 +46,6 @@ public class UsuarioService implements IUsuarioService
             Usuario usuarioBuscado = buscarPorId(id);
             usuarioBuscado.setCorreo(usuario.getCorreo());
             usuarioBuscado.setNombreUsuario(usuario.getNombreUsuario());
-            usuarioBuscado.setContrasenia(usuario.getContrasenia());
             usuarioBuscado.setFechaActualizacion(new Date());
             return usuarioRepository.save(usuarioBuscado);
         }
@@ -84,5 +83,58 @@ public class UsuarioService implements IUsuarioService
         }
     }
 
+    @Override
+    public Usuario findByCorreo(String correo) throws NoExisteEntidadExcepcion, EntidadInactivaExcepcion,
+            DataIncorrectaExcepcion {
+        if (correo == null) {
+            throw new DataIncorrectaExcepcion("Verifique la información enviada");
+        } else if (!ValidacionUtil.isCorreoValido(correo)) {
+            throw new DataIncorrectaExcepcion("El email enviado no es valido");
+        } else if (!usuarioRepository.findByCorreo(correo).isPresent()) {
+            throw new NoExisteEntidadExcepcion("No existe un usuario con ese email");
+        } else if (!usuarioRepository.findByCorreo(correo).get().isActivo()) {
+            throw new EntidadInactivaExcepcion("El usuario con este email se encuentra inactivo actualmente");
+        } else {
+            return usuarioRepository.findByCorreo(correo).get();
+        }
+    }
+
+    @Override
+    public boolean validarEmailContrasenia(String email, String contrasenia) throws NoExisteEntidadExcepcion, EntidadInactivaExcepcion, DataIncorrectaExcepcion {
+        Optional<Usuario> usuarioByEmail = usuarioRepository.findByCorreo(email);
+        if (!usuarioByEmail.isPresent()) {
+            throw new NoExisteEntidadExcepcion("No existe un usuario con ese email");
+        } else if (!usuarioByEmail.get().isActivo()) {
+            throw new EntidadInactivaExcepcion("EL cajero con este email se encuentra inactivo actualmente");
+        } else {
+            if (!usuarioRepository.findByCorreoAndContrasenia(email, contrasenia).isPresent()) {
+                throw new DataIncorrectaExcepcion("Verifique la contraseña");
+            } else {
+                return true;
+            }
+        }
+    }
+
+    @Override
+    public Usuario cambiarContrasenia(String correo, CambiarContraseniaDTO cambiarContrasenia) throws NoExisteEntidadExcepcion,
+            EntidadInactivaExcepcion, DataIncorrectaExcepcion {
+
+        Usuario actualizarUsuario = findByCorreo(correo);
+
+        if (cambiarContrasenia.getContraseniaaActual() == null
+                || cambiarContrasenia.getContraseniaNueva() == null) {
+            throw new DataIncorrectaExcepcion("Verifique la información enviada");
+        } else if (!actualizarUsuario.getContrasenia().equals(cambiarContrasenia.getContraseniaNueva())) {
+            throw new DataIncorrectaExcepcion("La contraseña actual es incorrecta");
+        } else if (cambiarContrasenia.getContraseniaaActual().equals(cambiarContrasenia.getContraseniaNueva())) {
+            throw new DataIncorrectaExcepcion("La contraseña actual es igual a la contraseña nueva");
+        } else {
+            actualizarUsuario.setContrasenia(cambiarContrasenia.getContraseniaNueva());
+            actualizarUsuario.setFechaActualizacion(new Date());
+            return usuarioRepository.save(actualizarUsuario);
+        }
+    }
+
 
 }
+

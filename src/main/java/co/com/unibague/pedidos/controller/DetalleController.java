@@ -1,63 +1,50 @@
 package co.com.unibague.pedidos.controller;
 
+import co.com.unibague.pedidos.dto.GuardarDetalleDTO;
 import co.com.unibague.pedidos.dto.RespuestaBaseDTO;
-import co.com.unibague.pedidos.dto.EstadoDTO;
-import co.com.unibague.pedidos.model.EstadoPedido;
-import co.com.unibague.pedidos.response.BaseResponse;
+import co.com.unibague.pedidos.model.DetallePedidoPK;
 import co.com.unibague.pedidos.service.exception.DataIncorrectaExcepcion;
 import co.com.unibague.pedidos.service.exception.EntidadInactivaExcepcion;
 import co.com.unibague.pedidos.service.exception.NoExisteEntidadExcepcion;
 import co.com.unibague.pedidos.service.exception.YaExisteEntidadExcepcion;
-import co.com.unibague.pedidos.service.impl.IEstadoService;
+import co.com.unibague.pedidos.service.impl.IDetalleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
-
-@RestController
-@RequestMapping("v1")
-public class EstadoController
+public class DetalleController
 {
     @Autowired
-    private IEstadoService estadoService;
+    private IDetalleService detalleService;
 
-  /*  @PostMapping(value = "estado", headers = "Accept=application/json")
-    public ResponseEntity<?> crear(@RequestBody EstadoDTO estado) {
+
+  /*  @PostMapping(value = "pedido", headers = "Accept=application/json")
+    public ResponseEntity<?> crear(@RequestBody GuardarDetalleDTO detalleDTO) {
         try {
-            return new ResponseEntity<>(estadoService.crear(estado.covertirEstado()), HttpStatus.CREATED);
-        } catch (YaExisteEntidadExcepcion | DataIncorrectaExcepcion exception ) {
+            return new ResponseEntity<>(detalleService.crear(detalleDTO), HttpStatus.CREATED);
+        } catch (YaExisteEntidadExcepcion | DataIncorrectaExcepcion | EntidadInactivaExcepcion exception) {
             return new ResponseEntity<>(RespuestaBaseDTO.builder()
                     .codigoEstado(HttpStatus.CONFLICT.value())
                     .mensaje(exception.getMessage())
                     .isCorrecto(false)
                     .build(), HttpStatus.CONFLICT);
-
-        }
-    } */
-
-    @PutMapping(value = "estado/{id}", headers = "Accept=application/json")
-    public ResponseEntity<?> actualizar(@PathVariable Long id, @RequestBody EstadoDTO estado) {
-        try {
-            return new ResponseEntity<>(estadoService.actualizar(id, estado), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(BaseResponse.builder()
+        } catch (NoExisteEntidadExcepcion noExisteEntidadExcepcion) {
+            return new ResponseEntity<>(RespuestaBaseDTO.builder()
+                    .codigoEstado(HttpStatus.NOT_FOUND.value())
+                    .mensaje(noExisteEntidadExcepcion.getMessage())
                     .isCorrecto(false)
-                    .mensaje(e.getMessage())
-                    .build(), HttpStatus.CONFLICT);
+                    .build(), HttpStatus.NOT_FOUND);
         }
     }
 
+   */
 
 
-
-
-
-    @GetMapping(value = "estado/{id}", headers = "Accept=application/json")
-    public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
+    @GetMapping(value = "detalle/{id}", headers = "Accept=application/json")
+    public ResponseEntity<?> buscarPorId(@PathVariable DetallePedidoPK id) {
         try {
-            return new ResponseEntity<>(estadoService.buscarPorId(id), HttpStatus.OK);
+            return new ResponseEntity<>(detalleService.buscarPorId(id), HttpStatus.OK);
         } catch (EntidadInactivaExcepcion entidadInactivaExcepcion) {
             return new ResponseEntity<>(RespuestaBaseDTO.builder()
                     .codigoEstado(HttpStatus.CONFLICT.value())
@@ -73,16 +60,27 @@ public class EstadoController
         }
     }
 
-    @GetMapping(value = "estado", headers = "Accept=application/json")
-    public ResponseEntity<?> listarTodos() {
+    @DeleteMapping(value = "detalle/{id}", headers = "Accept=application/json")
+    public ResponseEntity<?> eliminarPorId(@PathVariable DetallePedidoPK detallePedidoPK) {
         try {
-            return new ResponseEntity<>(estadoService.listarTodos(), HttpStatus.OK);
+            boolean pedidoEliminado = detalleService.eliminar(detallePedidoPK);
+            return new ResponseEntity<>(RespuestaBaseDTO.builder()
+                    .mensaje("pedido eliminado")
+                    .codigoEstado(HttpStatus.OK.value())
+                    .isCorrecto(pedidoEliminado)
+                    .build(), HttpStatus.OK);
         } catch (NoExisteEntidadExcepcion noExisteEntidadExcepcion) {
             return new ResponseEntity<>(RespuestaBaseDTO.builder()
                     .codigoEstado(HttpStatus.NOT_FOUND.value())
                     .mensaje(noExisteEntidadExcepcion.getMessage())
                     .isCorrecto(false)
                     .build(), HttpStatus.NOT_FOUND);
+        } catch (EntidadInactivaExcepcion entidadInactivaExcepcion) {
+            return new ResponseEntity<>(RespuestaBaseDTO.builder()
+                    .codigoEstado(HttpStatus.CONFLICT.value())
+                    .mensaje(entidadInactivaExcepcion.getMessage())
+                    .isCorrecto(false)
+                    .build(), HttpStatus.CONFLICT);
         }
     }
 }

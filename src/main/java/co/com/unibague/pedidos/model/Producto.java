@@ -28,6 +28,9 @@ public class Producto implements Serializable
     @Column(name = "cantidad_en_stock")
     private int cantidadEnStock;
     @Basic(optional = false)
+    @Column(name = "foto_producto")
+    private String fotoProducto;
+    @Basic(optional = false)
     @Column(name = "costo")
     private double costo;
     @Basic(optional = false)
@@ -60,6 +63,7 @@ public class Producto implements Serializable
     public boolean sonCamposValidos() {
         return cantidadEnStock >0 &&
                 costo >0 &&
+                fotoProducto != null &&
                 nombreProducto != null &&
                 iva >0;
     }

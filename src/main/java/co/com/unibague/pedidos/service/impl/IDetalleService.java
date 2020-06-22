@@ -10,7 +10,7 @@ import co.com.unibague.pedidos.service.exception.YaExisteEntidadExcepcion;
 
 public interface IDetalleService
 {
-    DetallePedido crear(DetallePedido detallePedido) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion, YaExisteEntidadExcepcion;
+    //DetallePedido crear(GuardarDetalleDTO detallePedido) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion, YaExisteEntidadExcepcion;
 
   //  DetallePedido actualizar(DetallePedidoPK detallePedidoPK, DetallePedido detalle) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion;
 
