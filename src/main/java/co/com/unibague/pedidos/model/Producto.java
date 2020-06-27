@@ -53,8 +53,6 @@ public class Producto implements Serializable
     @JoinColumn(name = "tipo_producto", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private TipoProducto tipoProducto;
-    //ess por la foranea?
-
 
   /*
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "producto")

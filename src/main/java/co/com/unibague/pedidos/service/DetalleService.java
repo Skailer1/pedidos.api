@@ -33,12 +33,12 @@ public class DetalleService implements IDetalleService
 
 
 
-    /*
-    @Override
+
+ /*   @Override
     public DetallePedido crear(GuardarDetalleDTO detalle) throws YaExisteEntidadExcepcion, DataIncorrectaExcepcion {
         DetallePedido detallePedido = detalle.getDetalle().covertirDetalle();
         Pedido pedidoPorId = pedidoService.buscarPorId(detalle.getPedidoId());
-        detallePedido.
+        detallePedido.setDetallePedidoPK();
         if (!detalle.sonCamposValidos()) {
             throw new DataIncorrectaExcepcion("Verifique la información enviada");
          } else if (detalleRepository.findById(detalle.getDetallePedidoPK()).isPresent()) {
@@ -52,7 +52,9 @@ public class DetalleService implements IDetalleService
     }
 
 
-     */
+
+  */
+
     /*@Override
     public DetallePedido actualizar(Long id, DetallePedido detalle) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion {
         if (!detalle.sonCamposValidos()) {
