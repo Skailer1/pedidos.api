@@ -33,9 +33,6 @@ public class Empleado implements Serializable {
     @Column(name = "telefono")
     private long telefono;
     @Basic(optional = false)
-    @Column(name = "correo")
-    private String correo;
-    @Basic(optional = false)
     @Column(name = "direccion")
     private String direccion;
     @Basic(optional = false)
@@ -80,7 +77,6 @@ public class Empleado implements Serializable {
         return nombre != null &&
                 direccion != null &&
                 telefono > 0 &&
-                correo != null &&
                 rh != RH.VACIO &&
                 direccion != null &&
                 sexo != Sexo.VACIO &&

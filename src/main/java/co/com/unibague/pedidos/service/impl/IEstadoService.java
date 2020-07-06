@@ -12,7 +12,7 @@ import java.util.List;
 public interface IEstadoService
 
 {
-    //EstadoPedido crear(EstadoPedido estado) throws   DataIncorrectaExcepcion, YaExisteEntidadExcepcion;
+    EstadoPedido crear(EstadoPedido estado) throws   DataIncorrectaExcepcion /*,YaExisteEntidadExcepcion*/;
 
     EstadoPedido actualizar(Long id, EstadoDTO estado) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion;
 

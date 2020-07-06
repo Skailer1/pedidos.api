@@ -4,6 +4,7 @@ import co.com.unibague.pedidos.dto.GuardarDetalleDTO;
 import co.com.unibague.pedidos.model.DetallePedido;
 import co.com.unibague.pedidos.model.DetallePedidoPK;
 import co.com.unibague.pedidos.model.Pedido;
+import co.com.unibague.pedidos.model.Producto;
 import co.com.unibague.pedidos.repository.DetalleRepository;
 import co.com.unibague.pedidos.service.exception.DataIncorrectaExcepcion;
 import co.com.unibague.pedidos.service.exception.EntidadInactivaExcepcion;
@@ -16,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 @Service("detalleService")
@@ -34,26 +34,28 @@ public class DetalleService implements IDetalleService
 
 
 
- /*   @Override
-    public DetallePedido crear(GuardarDetalleDTO detalle) throws YaExisteEntidadExcepcion, DataIncorrectaExcepcion {
+    @Override
+    public DetallePedido crear(GuardarDetalleDTO detalle) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion,  YaExisteEntidadExcepcion, DataIncorrectaExcepcion {
         DetallePedido detallePedido = detalle.getDetalle().covertirDetalle();
-        Pedido pedidoPorId = pedidoService.buscarPorId(detalle.getPedidoId());
-        detallePedido.setDetallePedidoPK();
-        if (!detalle.sonCamposValidos()) {
+        Pedido pedidoPorId = pedidoService.buscarPorId(detalle.getPedido());
+        detallePedido.setPedido(pedidoPorId);
+        Producto productoPorId = productoService.buscarPorId(detalle.getProducto());
+        detallePedido.setProducto(productoPorId);
+        if (!detallePedido.sonCamposValidos()) {
             throw new DataIncorrectaExcepcion("Verifique la información enviada");
-         } else if (detalleRepository.findById(detalle.getDetallePedidoPK()).isPresent()) {
+         } else if (detalleRepository.findByFechaCreacion(detallePedido.getFechaCreacion()).isPresent()) {
             throw new YaExisteEntidadExcepcion("Ya existe un detalle con ese id");
         } else {
-            detalle.setFechaCreacion(new Date());
-            detalle.setFechaActualizacion(new Date());
-            detalle.setActivo(true);
-            return detalleRepository.save(detalle);
+            detallePedido.setFechaCreacion(new Date());
+            detallePedido.setFechaActualizacion(new Date());
+            detallePedido.setActivo(true);
+            return detalleRepository.save(detallePedido);
         }
     }
 
 
 
-  */
+
 
     /*@Override
     public DetallePedido actualizar(Long id, DetallePedido detalle) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion {
@@ -69,7 +71,8 @@ public class DetalleService implements IDetalleService
 
      */
 
-    @Override
+
+   /* @Override
     public boolean eliminar(DetallePedidoPK detallePedidoPK) throws NoExisteEntidadExcepcion, EntidadInactivaExcepcion {
         boolean resultado = false;
         DetallePedido detallePorId = buscarPorId(detallePedidoPK);
@@ -82,10 +85,12 @@ public class DetalleService implements IDetalleService
         return resultado;
     }
 
+    */
 
-    @Override
+
+  /*  @Override
     public DetallePedido buscarPorId(DetallePedidoPK detallePedidoPK) throws NoExisteEntidadExcepcion, EntidadInactivaExcepcion {
-        Optional<DetallePedido> detallePorId = detalleRepository.findById(detallePedidoPK);
+        Optional<DetallePedido> detallePorId = detalleRepository.findById(id);
         if (!detallePorId.isPresent()) {
             throw new NoExisteEntidadExcepcion("No existe un detalle con ese id");
         }
@@ -96,5 +101,7 @@ public class DetalleService implements IDetalleService
             return detalleBuscado;
         }
     }
+
+   */
 
 }

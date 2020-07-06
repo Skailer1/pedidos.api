@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class GuardarDetalleDTO
 {
 
-    private Long productoId;
-    private Long pedidoId;
+    private Long producto;
+    private Long pedido;
     private DetallePedidoDTO detalle;
 }

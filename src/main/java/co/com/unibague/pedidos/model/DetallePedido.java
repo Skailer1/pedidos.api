@@ -8,20 +8,31 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
+
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "detalle_pedido", schema = "public")
+@Table(name = "detalle_pedido", schema = "public",uniqueConstraints=
+@UniqueConstraint(columnNames={"pedido_id", "producto_id"}))
 
 public class DetallePedido implements Serializable
 {
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected DetallePedidoPK detallePedidoPK;
+  //  @EmbeddedId
+  //  protected DetallePedidoPK detallePedidoPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "pedido_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private Pedido pedido;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "producto_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private Producto producto;
     @Basic(optional = false)
     @Column(name = "cantidad")
     private int cantidad;
@@ -42,12 +53,7 @@ public class DetallePedido implements Serializable
     @Basic(optional = false)
     @Column(name = "is_activo")
     private boolean isActivo;
-   /* @JoinColumn(name = "pedido_id", referencedColumnName = "id", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Pedido pedido;
-    @JoinColumn(name = "producto_id", referencedColumnName = "id", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Producto producto; */
+
 
     public boolean sonCamposValidos() {
         return cantidad >0 &&

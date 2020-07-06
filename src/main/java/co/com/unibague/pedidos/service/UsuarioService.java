@@ -102,14 +102,15 @@ public class UsuarioService implements IUsuarioService {
     @Override
     public boolean validarEmailContrasenia(String email, String contrasenia) throws NoExisteEntidadExcepcion, EntidadInactivaExcepcion, DataIncorrectaExcepcion {
         Optional<Usuario> usuarioByEmail = usuarioRepository.findByCorreo(email);
-        if (!usuarioByEmail.isPresent()) {
+         if (!usuarioByEmail.isPresent()) {
             throw new NoExisteEntidadExcepcion("No existe un usuario con ese email");
         } else if (!usuarioByEmail.get().isActivo()) {
             throw new EntidadInactivaExcepcion("EL cajero con este email se encuentra inactivo actualmente");
         } else {
             if (!usuarioRepository.findByCorreoAndContrasenia(email, contrasenia).isPresent()) {
                 throw new DataIncorrectaExcepcion("Verifique la contraseña");
-            } else {
+            }
+                else {
                 return true;
             }
         }

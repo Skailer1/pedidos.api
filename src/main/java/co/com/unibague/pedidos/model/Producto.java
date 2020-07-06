@@ -28,8 +28,8 @@ public class Producto implements Serializable
     @Column(name = "cantidad_en_stock")
     private int cantidadEnStock;
     @Basic(optional = false)
-    @Column(name = "foto_producto")
-    private String fotoProducto;
+    @Column(name = "imagen_url")
+    private String imagenUrl;
     @Basic(optional = false)
     @Column(name = "costo")
     private double costo;
@@ -61,7 +61,7 @@ public class Producto implements Serializable
     public boolean sonCamposValidos() {
         return cantidadEnStock >0 &&
                 costo >0 &&
-                fotoProducto != null &&
+                imagenUrl != null &&
                 nombreProducto != null &&
                 iva >0;
     }

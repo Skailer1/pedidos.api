@@ -19,10 +19,10 @@ public class DetalleController
     private IDetalleService detalleService;
 
 
-  /*  @PostMapping(value = "pedido", headers = "Accept=application/json")
-    public ResponseEntity<?> crear(@RequestBody GuardarDetalleDTO detalleDTO) {
+    @PostMapping(value = "detalle", headers = "Accept=application/json")
+    public ResponseEntity<?> crear(@RequestBody GuardarDetalleDTO detalle) {
         try {
-            return new ResponseEntity<>(detalleService.crear(detalleDTO), HttpStatus.CREATED);
+            return new ResponseEntity<>(detalleService.crear(detalle), HttpStatus.CREATED);
         } catch (YaExisteEntidadExcepcion | DataIncorrectaExcepcion | EntidadInactivaExcepcion exception) {
             return new ResponseEntity<>(RespuestaBaseDTO.builder()
                     .codigoEstado(HttpStatus.CONFLICT.value())
@@ -38,10 +38,10 @@ public class DetalleController
         }
     }
 
-   */
 
 
-    @GetMapping(value = "detalle/{id}", headers = "Accept=application/json")
+
+ /*   @GetMapping(value = "detalle/{id}", headers = "Accept=application/json")
     public ResponseEntity<?> buscarPorId(@PathVariable DetallePedidoPK id) {
         try {
             return new ResponseEntity<>(detalleService.buscarPorId(id), HttpStatus.OK);
@@ -83,4 +83,6 @@ public class DetalleController
                     .build(), HttpStatus.CONFLICT);
         }
     }
+
+  */
 }

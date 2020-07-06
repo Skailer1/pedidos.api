@@ -23,11 +23,11 @@ public class EstadoController
     @Autowired
     private IEstadoService estadoService;
 
-  /*  @PostMapping(value = "estado", headers = "Accept=application/json")
+    @PostMapping(value = "estado", headers = "Accept=application/json")
     public ResponseEntity<?> crear(@RequestBody EstadoDTO estado) {
         try {
             return new ResponseEntity<>(estadoService.crear(estado.covertirEstado()), HttpStatus.CREATED);
-        } catch (YaExisteEntidadExcepcion | DataIncorrectaExcepcion exception ) {
+        } catch (/*YaExisteEntidadExcepcion |*/ DataIncorrectaExcepcion exception ) {
             return new ResponseEntity<>(RespuestaBaseDTO.builder()
                     .codigoEstado(HttpStatus.CONFLICT.value())
                     .mensaje(exception.getMessage())
@@ -35,7 +35,7 @@ public class EstadoController
                     .build(), HttpStatus.CONFLICT);
 
         }
-    } */
+    }
 
     @PutMapping(value = "estado/{id}", headers = "Accept=application/json")
     public ResponseEntity<?> actualizar(@PathVariable Long id, @RequestBody EstadoDTO estado) {

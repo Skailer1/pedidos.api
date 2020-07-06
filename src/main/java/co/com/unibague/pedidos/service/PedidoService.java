@@ -2,16 +2,14 @@ package co.com.unibague.pedidos.service;
 
 import co.com.unibague.pedidos.dto.GuardarPedidoDTO;
 import co.com.unibague.pedidos.dto.PedidoDTO;
-import co.com.unibague.pedidos.model.Datos;
-import co.com.unibague.pedidos.model.Empleado;
-import co.com.unibague.pedidos.model.Mesa;
-import co.com.unibague.pedidos.model.Pedido;
+import co.com.unibague.pedidos.model.*;
 import co.com.unibague.pedidos.repository.PedidoRepository;
 import co.com.unibague.pedidos.service.exception.DataIncorrectaExcepcion;
 import co.com.unibague.pedidos.service.exception.EntidadInactivaExcepcion;
 import co.com.unibague.pedidos.service.exception.NoExisteEntidadExcepcion;
 import co.com.unibague.pedidos.service.exception.YaExisteEntidadExcepcion;
 import co.com.unibague.pedidos.service.impl.IEmpleadoService;
+import co.com.unibague.pedidos.service.impl.IEstadoService;
 import co.com.unibague.pedidos.service.impl.IMesaService;
 import co.com.unibague.pedidos.service.impl.IPedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +28,8 @@ public class PedidoService implements IPedidoService
     private IEmpleadoService empleadoService;
     @Autowired
     private IMesaService mesaService;
+    @Autowired
+    private IEstadoService estadoService;
 
 
     @Override
@@ -40,6 +40,8 @@ public class PedidoService implements IPedidoService
         pedido.setEmpleadoId(empleadoPorId);
         Mesa mesaPorId = mesaService.buscarPorId(guardarPedido.getMesaId());
         pedido.setMesaId(mesaPorId);
+        EstadoPedido estadoPorId = estadoService.buscarPorId(guardarPedido.getEstadoId());
+        pedido.setEstadoId(estadoPorId);
        if (!pedido.sonCamposValidos()) {
             throw new DataIncorrectaExcepcion("Verifique la información enviada");
            }  if (pedidoRepository.findByFechaPedido(pedido.getFechaPedido()).isPresent()) {

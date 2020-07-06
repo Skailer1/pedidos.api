@@ -8,11 +8,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-public interface DetalleRepository extends CrudRepository<DetallePedido, DetallePedidoPK> {
+public interface DetalleRepository extends CrudRepository<DetallePedido, Long> {
     Optional<DetallePedido> findByFechaCreacion(Date fechaCreacion);
 
 // hmm es que aqui es una llave compuesta no se como hacer el findBy
-    //no es eso, solamente pogale paramatro a esa consulta
+
 
 
 }

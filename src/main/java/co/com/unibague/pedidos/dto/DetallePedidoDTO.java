@@ -14,6 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 public class DetallePedidoDTO {
+    private Long id;
     private int cantidad;
     private double valorUnitario;
     private double total;
@@ -25,6 +26,7 @@ public class DetallePedidoDTO {
 
     public DetallePedido covertirDetalle() {
         return DetallePedido.builder()
+                .id(id)
                 .cantidad(cantidad)
                 .valorUnitario(valorUnitario)
                 .total(total)

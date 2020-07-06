@@ -20,7 +20,6 @@ public class EmpleadoDTO {
     private Long id;
     private String nombre;
     private long telefono;
-    private String correo;
     private RH rh;
     private Sexo sexo;
     private long numeroDocumento;
@@ -34,7 +33,6 @@ public class EmpleadoDTO {
                 .id(id)
                 .nombre(nombre)
                 .telefono(telefono)
-                .correo(correo)
                 .direccion(direccion)
                 .rh(rh)
                 .sexo(sexo)

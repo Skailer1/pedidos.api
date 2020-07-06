@@ -17,6 +17,7 @@ public class TipoProductoDTO
 {
     private Long id;
     private String descripcion;
+    private String imagenUrl;
     private boolean isActivo;
     private Date fechaCreacion;
     private Date fechaActualizacion;
@@ -25,6 +26,7 @@ public class TipoProductoDTO
         return TipoProducto.builder()
                 .id(id)
                 .descripcion(descripcion)
+                .imagenUrl(imagenUrl)
                 .isActivo(isActivo)
                 .fechaActualizacion(new Date())
                 .build();

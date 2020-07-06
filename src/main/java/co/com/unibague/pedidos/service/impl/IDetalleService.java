@@ -10,13 +10,13 @@ import co.com.unibague.pedidos.service.exception.YaExisteEntidadExcepcion;
 
 public interface IDetalleService
 {
- //   DetallePedido crear(GuardarDetalleDTO detallePedido) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion, YaExisteEntidadExcepcion;
+    DetallePedido crear(GuardarDetalleDTO detallePedido) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion, YaExisteEntidadExcepcion;
 
   //  DetallePedido actualizar(DetallePedidoPK detallePedidoPK, DetallePedido detalle) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion;
 
-    boolean eliminar(DetallePedidoPK detallePedidoPK) throws NoExisteEntidadExcepcion, EntidadInactivaExcepcion;
+ //   boolean eliminar(DetallePedidoPK detallePedidoPK) throws NoExisteEntidadExcepcion, EntidadInactivaExcepcion;
 
-    DetallePedido buscarPorId(DetallePedidoPK detallePedidoPK) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion;
+    //DetallePedido buscarPorId(DetallePedidoPK detallePedidoPK) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion;
 
 
 }

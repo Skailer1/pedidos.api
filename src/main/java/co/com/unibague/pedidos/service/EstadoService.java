@@ -7,6 +7,7 @@ import co.com.unibague.pedidos.repository.EstadoRepository;
 import co.com.unibague.pedidos.service.exception.DataIncorrectaExcepcion;
 import co.com.unibague.pedidos.service.exception.EntidadInactivaExcepcion;
 import co.com.unibague.pedidos.service.exception.NoExisteEntidadExcepcion;
+import co.com.unibague.pedidos.service.exception.YaExisteEntidadExcepcion;
 import co.com.unibague.pedidos.service.impl.IEstadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,11 +22,11 @@ public class EstadoService implements IEstadoService
     @Autowired
     private EstadoRepository estadoRepository;
 
-   /* public EstadoPedido crear(EstadoPedido estado) throws YaExisteEntidadExcepcion, DataIncorrectaExcepcion {
+    public EstadoPedido crear(EstadoPedido estado) throws /*YaExisteEntidadExcepcion,*/ DataIncorrectaExcepcion {
         if (!estado.sonCamposValidos()) {
             throw new DataIncorrectaExcepcion("Verifique la información enviada");
-         } else if (estadoRepository.findById(estado.getId()).isPresent()) {
-            throw new YaExisteEntidadExcepcion("Ya existe un estado con ese id");
+       //  } else if (estadoRepository.findByDescripcion(estado.getDescripcionEstado()).isPresent()) {
+       //     throw new YaExisteEntidadExcepcion("Ya existe un estado con ese id");
         } else {
             estado.setFechaCreacion(new Date());
             estado.setFechaActualizacion(new Date());
@@ -34,7 +35,7 @@ public class EstadoService implements IEstadoService
         }
     }
 
-*/
+
     @Override
     public EstadoPedido actualizar(Long id, EstadoDTO estado) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion {
         EstadoPedido estadoPedido = estado.covertirEstado();

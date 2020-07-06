@@ -29,6 +29,9 @@ public class TipoProducto implements Serializable
     @Column(name = "descripcion")
     private String descripcion;
     @Basic(optional = false)
+    @Column(name = "imagen_url")
+    private String imagenUrl;
+    @Basic(optional = false)
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
@@ -43,7 +46,8 @@ public class TipoProducto implements Serializable
     private List<Producto> productoList; */
 
     public boolean sonCamposValidos() {
-        return descripcion != null ;
+        return descripcion != null &&
+                imagenUrl != null;
     }
 
 }
