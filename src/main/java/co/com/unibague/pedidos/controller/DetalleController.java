@@ -39,10 +39,24 @@ public class DetalleController
     }
 
 
+    @GetMapping(value = "detalle", headers = "Accept=application/json")
+    public ResponseEntity<?> listarTodos() {
+        try {
+            return new ResponseEntity<>(detalleService.listarTodos(), HttpStatus.OK);
+        } catch (NoExisteEntidadExcepcion noExisteEntidadExcepcion) {
+            return new ResponseEntity<>(RespuestaBaseDTO.builder()
+                    .codigoEstado(HttpStatus.NOT_FOUND.value())
+                    .mensaje(noExisteEntidadExcepcion.getMessage())
+                    .isCorrecto(false)
+                    .build(), HttpStatus.NOT_FOUND);
+        }
+    }
 
 
- /*   @GetMapping(value = "detalle/{id}", headers = "Accept=application/json")
-    public ResponseEntity<?> buscarPorId(@PathVariable DetallePedidoPK id) {
+
+
+    @GetMapping(value = "detalle/{id}", headers = "Accept=application/json")
+    public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
         try {
             return new ResponseEntity<>(detalleService.buscarPorId(id), HttpStatus.OK);
         } catch (EntidadInactivaExcepcion entidadInactivaExcepcion) {
@@ -61,9 +75,9 @@ public class DetalleController
     }
 
     @DeleteMapping(value = "detalle/{id}", headers = "Accept=application/json")
-    public ResponseEntity<?> eliminarPorId(@PathVariable DetallePedidoPK detallePedidoPK) {
+    public ResponseEntity<?> eliminarPorId(@PathVariable Long id) {
         try {
-            boolean pedidoEliminado = detalleService.eliminar(detallePedidoPK);
+            boolean pedidoEliminado = detalleService.eliminar(id);
             return new ResponseEntity<>(RespuestaBaseDTO.builder()
                     .mensaje("pedido eliminado")
                     .codigoEstado(HttpStatus.OK.value())
@@ -84,5 +98,5 @@ public class DetalleController
         }
     }
 
-  */
+
 }

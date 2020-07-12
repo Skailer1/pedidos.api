@@ -3,6 +3,7 @@ package co.com.unibague.pedidos.dto;
 import co.com.unibague.pedidos.enums.RH;
 import co.com.unibague.pedidos.enums.Sexo;
 import co.com.unibague.pedidos.enums.TipoDocumentoEnum;
+import co.com.unibague.pedidos.enums.TipoEmpleadoEnum;
 import co.com.unibague.pedidos.model.Empleado;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,6 +23,8 @@ public class EmpleadoDTO {
     private long telefono;
     private RH rh;
     private Sexo sexo;
+    private TipoDocumentoEnum tipoDocumento;
+    private TipoEmpleadoEnum tipoEmpleado;
     private long numeroDocumento;
     private String direccion;
     private boolean isActivo;
@@ -36,6 +39,8 @@ public class EmpleadoDTO {
                 .direccion(direccion)
                 .rh(rh)
                 .sexo(sexo)
+                .tipoDocumento(tipoDocumento)
+                .tipoEmpleado(tipoEmpleado)
                 .numeroDocumento(numeroDocumento)
                 .isActivo(isActivo)
                 .fechaActualizacion(new Date())

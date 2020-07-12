@@ -30,25 +30,25 @@ public class EmpleadoService implements IEmpleadoService {
 
     @Autowired
     private IUsuarioService usuarioService;
-    @Autowired
+ /*   @Autowired
     private ITipoEmpleadoService tipoEmpleadoService;
     @Autowired
-    private ITipoDocumentoService tipoDocumentoService;
+    private ITipoDocumentoService tipoDocumentoService;*/
 
     @Override
     public Empleado crear(GuardarEmpleadoDTO guardarEmpleado) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion, YaExisteEntidadExcepcion {
         Empleado empleado = guardarEmpleado.getEmpleado().covertirEmpleado();
         Usuario usuarioPorId = usuarioService.buscarPorId(guardarEmpleado.getUsuarioId());
         empleado.setUsuarioId(usuarioPorId);
-        TipoEmpleado tipoEmpleadoPorId = tipoEmpleadoService.buscarPorId(guardarEmpleado.getTipoEmpleado());
+/*        TipoEmpleado tipoEmpleadoPorId = tipoEmpleadoService.buscarPorId(guardarEmpleado.getTipoEmpleado());
         empleado.setTipoEmpleado(tipoEmpleadoPorId);
         TipoDocumento tipoDocumentoPorId = tipoDocumentoService.buscarPorId(guardarEmpleado.getTipoDocumento());
-        empleado.setTipoDocumento(tipoDocumentoPorId);
+        empleado.setTipoDocumento(tipoDocumentoPorId);*/
         if (!empleado.sonCamposValidos()) {
             throw new DataIncorrectaExcepcion("Verifique la información enviada");
         }
-        if (empleadoRepository.findByNumeroDocumentoAndTipoDocumento_Id(empleado.getNumeroDocumento(), guardarEmpleado.getTipoDocumento()).isPresent()) {
-            throw new YaExisteEntidadExcepcion("Ya existe un empleado con ese numero y tipo de documento");
+        if (empleadoRepository.findByNumeroDocumento(empleado.getNumeroDocumento()).isPresent()) {
+            throw new YaExisteEntidadExcepcion("Ya existe un empleado con ese numero documento");
         } else {
             empleado.setActivo(true);
             empleado.setFechaCreacion(new Date());

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service("usuarioService")
@@ -33,6 +34,17 @@ public class UsuarioService implements IUsuarioService {
             return usuarioRepository.save(usuario);
         }
     }
+
+    public List<Usuario> listarTodos() throws NoExisteEntidadExcepcion {
+        List<Usuario> pedidos = (List<Usuario>) usuarioRepository.findAll();
+        if (pedidos.isEmpty()) {
+            throw new NoExisteEntidadExcepcion("No hay pedidos registrados");
+        }
+        else {
+            return pedidos;
+        }
+    }
+
 
     @Override
     public Usuario actualizar(Long id, Usuario usuario) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion {

@@ -95,7 +95,7 @@ public class PedidoService implements IPedidoService
     public List<Pedido> listarTodos() throws NoExisteEntidadExcepcion {
         List<Pedido> pedidos = (List<Pedido>) pedidoRepository.findAll();
         if (pedidos.isEmpty()) {
-            throw new NoExisteEntidadExcepcion("No hay mesas registradas");
+            throw new NoExisteEntidadExcepcion("No hay pedidos registrados");
         }
         else {
             return pedidos;

@@ -55,15 +55,15 @@ public class Empleado implements Serializable {
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "sexo")
     private Sexo sexo = Sexo.VACIO;
-    @JoinColumn(name = "tipo_documento", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private TipoDocumento tipoDocumento;
+    @Basic(optional = false)
+    @Column(name = "tipo_documento")
+    private TipoDocumentoEnum tipoDocumento;
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Usuario usuarioId;
-    @JoinColumn(name = "tipo_empleado", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private TipoEmpleado tipoEmpleado;
+    @Basic(optional = false)
+    @Column(name = "tipo_empleado")
+    private TipoEmpleadoEnum tipoEmpleado;
 
   /*  @OneToMany(cascade = CascadeType.ALL, mappedBy = "empleadoId")
     private List<Pago> pagoList; */
@@ -75,11 +75,12 @@ public class Empleado implements Serializable {
 
     public boolean sonCamposValidos() {
         return nombre != null &&
-                direccion != null &&
                 telefono > 0 &&
                 rh != RH.VACIO &&
-                direccion != null &&
                 sexo != Sexo.VACIO &&
-                numeroDocumento > 0;
+                tipoEmpleado != TipoEmpleadoEnum.VACIO &&
+                tipoDocumento != TipoDocumentoEnum.VACIO &&
+                numeroDocumento > 0 &&
+                direccion != null ;
     }
 }

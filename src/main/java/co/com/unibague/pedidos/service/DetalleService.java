@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service("detalleService")
@@ -43,7 +44,7 @@ public class DetalleService implements IDetalleService
         detallePedido.setProducto(productoPorId);
         if (!detallePedido.sonCamposValidos()) {
             throw new DataIncorrectaExcepcion("Verifique la información enviada");
-         } else if (detalleRepository.findByFechaCreacion(detallePedido.getFechaCreacion()).isPresent()) {
+         } else if (detalleRepository.findByProductoAndPedido(detallePedido.getProducto(), detallePedido.getPedido()).isPresent()) {
             throw new YaExisteEntidadExcepcion("Ya existe un detalle con ese id");
         } else {
             detallePedido.setFechaCreacion(new Date());
@@ -72,10 +73,10 @@ public class DetalleService implements IDetalleService
      */
 
 
-   /* @Override
-    public boolean eliminar(DetallePedidoPK detallePedidoPK) throws NoExisteEntidadExcepcion, EntidadInactivaExcepcion {
+    @Override
+    public boolean eliminar(Long id) throws NoExisteEntidadExcepcion, EntidadInactivaExcepcion {
         boolean resultado = false;
-        DetallePedido detallePorId = buscarPorId(detallePedidoPK);
+        DetallePedido detallePorId = buscarPorId(id);
         if (detallePorId != null) {
             detallePorId.setActivo(false);
             detallePorId.setFechaActualizacion(new Date());
@@ -85,11 +86,22 @@ public class DetalleService implements IDetalleService
         return resultado;
     }
 
-    */
 
 
-  /*  @Override
-    public DetallePedido buscarPorId(DetallePedidoPK detallePedidoPK) throws NoExisteEntidadExcepcion, EntidadInactivaExcepcion {
+    public List<DetallePedido> listarTodos() throws NoExisteEntidadExcepcion {
+        List<DetallePedido> detalles = (List<DetallePedido>) detalleRepository.findAll();
+        if (detalles.isEmpty()) {
+            throw new NoExisteEntidadExcepcion("No hay mesas registradas");
+        }
+        else {
+            return detalles;
+        }
+    }
+
+
+
+   @Override
+    public DetallePedido buscarPorId(Long id) throws NoExisteEntidadExcepcion, EntidadInactivaExcepcion {
         Optional<DetallePedido> detallePorId = detalleRepository.findById(id);
         if (!detallePorId.isPresent()) {
             throw new NoExisteEntidadExcepcion("No existe un detalle con ese id");
@@ -102,6 +114,6 @@ public class DetalleService implements IDetalleService
         }
     }
 
-   */
+
 
 }

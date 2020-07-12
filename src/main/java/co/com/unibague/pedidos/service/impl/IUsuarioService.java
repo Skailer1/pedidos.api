@@ -7,8 +7,12 @@ import co.com.unibague.pedidos.service.exception.EntidadInactivaExcepcion;
 import co.com.unibague.pedidos.service.exception.NoExisteEntidadExcepcion;
 import co.com.unibague.pedidos.service.exception.YaExisteEntidadExcepcion;
 
+import java.util.List;
+
 public interface IUsuarioService {
     Usuario crear(Usuario usuario) throws DataIncorrectaExcepcion, YaExisteEntidadExcepcion;
+
+    List<Usuario> listarTodos() throws NoExisteEntidadExcepcion;
 
     Usuario actualizar(Long id, Usuario usuario) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion;
 

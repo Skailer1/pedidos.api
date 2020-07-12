@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("v1")
-public class TipoEmpleadoController {
+public class    TipoEmpleadoController {
     @Autowired
     private ITipoEmpleadoService tipoEmpleadoService;
 
