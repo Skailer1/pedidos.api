@@ -51,6 +51,9 @@ public class Pedido implements Serializable
     @JoinColumn(name = "estado_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private EstadoPedido estadoId;
+
+  /*  @OneToMany
+    private List<Producto> listaProductos;*/
    /* @OneToOne(cascade = CascadeType.ALL, mappedBy = "pedidoId")
     private Pago pago;
 
@@ -64,7 +67,7 @@ public class Pedido implements Serializable
     private List<EstadoPorPedidoRepository> estadoPorPedidoList; */
 
     public boolean sonCamposValidos() {
-        return fechaPedido != null ;
+        return fechaPedido != null   ;
     }
 
 

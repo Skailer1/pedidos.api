@@ -13,5 +13,5 @@ public interface PedidoRepository extends CrudRepository<Pedido, Long>
 
     Optional<Pedido> findByFechaPedido(Date fecha);
 
-   // List<Pedido> findByActivo(boolean isActivo);
+   // List<Pedido> findByActivoIsTrue(boolean isActivo );
 }

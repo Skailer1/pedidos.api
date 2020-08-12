@@ -22,7 +22,7 @@ public class PedidoController {
     private IPedidoService pedidoService;
 
     @PostMapping(value = "pedido", headers = "Accept=application/json")
-    public ResponseEntity<?> crear(@RequestBody GuardarPedidoDTO pedido) {
+    public ResponseEntity<?> crear(@RequestBody GuardarPedidoDTO pedido ) {
         try {
             return new ResponseEntity<>(pedidoService.crear(pedido), HttpStatus.CREATED);
         } catch (YaExisteEntidadExcepcion | DataIncorrectaExcepcion | EntidadInactivaExcepcion exception) {

@@ -58,6 +58,8 @@ public class DetalleService implements IDetalleService
 
 
 
+
+
     /*@Override
     public DetallePedido actualizar(Long id, DetallePedido detalle) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion {
         if (!detalle.sonCamposValidos()) {
@@ -91,7 +93,7 @@ public class DetalleService implements IDetalleService
     public List<DetallePedido> listarTodos() throws NoExisteEntidadExcepcion {
         List<DetallePedido> detalles = (List<DetallePedido>) detalleRepository.findAll();
         if (detalles.isEmpty()) {
-            throw new NoExisteEntidadExcepcion("No hay mesas registradas");
+            throw new NoExisteEntidadExcepcion("No hay detalle registrados");
         }
         else {
             return detalles;

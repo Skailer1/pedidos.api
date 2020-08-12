@@ -1,6 +1,7 @@
 package co.com.unibague.pedidos.service;
 
 import co.com.unibague.pedidos.dto.GuardarProductoDTO;
+import co.com.unibague.pedidos.dto.ProductoDTO;
 import co.com.unibague.pedidos.model.Producto;
 import co.com.unibague.pedidos.model.TipoProducto;
 import co.com.unibague.pedidos.repository.ProductoRepository;
@@ -53,6 +54,18 @@ public class ProductoService implements IProductoService
         }
     }
 
+/*
+    public int unidadesDisponibles (Date fecha) {
+    List <ProductoDTO> subTotal = pedidoRepository.findbyFecha(fecha);
+    dobule total = 0.0;
+    for (Pedido pedido : subTotal) {
+        total += pedido.getTotal();
+    }
+    return total;
+    }
+
+
+ */
 
 
     /*@Override

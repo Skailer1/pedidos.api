@@ -18,8 +18,6 @@ public class DetallePedidoDTO {
     private int cantidad;
     private double valorUnitario;
     private double total;
-    /* private ProductoDTO producto;
-    private PedidoDTO pedido;*/
     private boolean isActivo;
     private Date fechaCreacion;
     private Date fechaActualizacion;

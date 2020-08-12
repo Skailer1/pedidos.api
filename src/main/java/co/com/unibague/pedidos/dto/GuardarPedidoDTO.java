@@ -16,6 +16,7 @@ public class GuardarPedidoDTO {
     private Long mesaId;
     private Long empleadoId;
     private Long estadoId;
+    private List<ProductoDTO> productos ;
     private PedidoDTO pedido = new PedidoDTO();
 
 }

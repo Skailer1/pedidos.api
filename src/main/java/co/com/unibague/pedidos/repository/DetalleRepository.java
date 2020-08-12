@@ -15,8 +15,7 @@ public interface DetalleRepository extends CrudRepository<DetallePedido, Long> {
     Optional<DetallePedido> findByFechaCreacion(Date fechaCreacion);
 
     Optional<DetallePedido> findByProductoAndPedido(Producto producto, Pedido pedido);
-
-// hmm es que aqui es una llave compuesta no se como hacer el findBy
+//estos query al parecer no los reconoce
 
 
 

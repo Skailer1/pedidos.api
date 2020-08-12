@@ -20,6 +20,8 @@ public class PedidoDTO {
     private Date fechaCreacion = new Date();
     private Date fechaActualizacion = new Date();
 
+
+
     public Pedido covertirPedido() {
         return Pedido.builder()
                 .id(id)

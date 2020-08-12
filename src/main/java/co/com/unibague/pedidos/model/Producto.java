@@ -1,5 +1,6 @@
 package co.com.unibague.pedidos.model;
 
+import co.com.unibague.pedidos.dto.ProductoDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -7,7 +8,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 @Data
@@ -17,10 +20,10 @@ import java.util.List;
 @Entity
 @Table(name = "producto", schema = "public")
 
-public class Producto implements Serializable
-{
+public class Producto implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
@@ -59,10 +62,28 @@ public class Producto implements Serializable
     private List<DetallePedido> detallePedidoList; */
 
     public boolean sonCamposValidos() {
-        return cantidadEnStock >0 &&
-                costo >0 &&
+        return cantidadEnStock > 0 &&
+                costo > 0 &&
                 imagenUrl != null &&
                 nombreProducto != null &&
-                iva >0;
+                iva > 0;
+    }
+
+    //mire en google como se recorre un iterable
+    //si amigo estoy mirando desde el telefono
+    //antes fel for debe crear un Iterable<Producto> y en ese iterable va al almacenando , asumo que en ProductoDTO ya tiene el método de convertir Si amigo ProdcutoDTO a Producto
+    // la inicializo con que amigo ? paso el repository ?
+    //nada de eso amigo, echele mente. Tiene una lista y lo unico que tiene que hacer es convertir esa misma lista a una nueva
+    //simplemente inicie esa variable con new Iterable<>()
+    //la lista que recorro en el for es esa de tipo Producto o la de ProductoDTO?
+    ////cuál cree usted amigo? tengo que convertir cada DTO a producto no ? la DTO, sisa
+    //Listo
+    //este es el que paso en el service cierto
+    public static Iterable<Producto> convertirListaDTOAProducto(List<ProductoDTO> listaConvertir) {
+        List<Producto> productosConver = new ArrayList<>();
+        for (ProductoDTO producto : listaConvertir) {
+            productosConver.add(producto.covertirProducto());
+        }
+        return productosConver;
     }
 }
