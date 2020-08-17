@@ -34,11 +34,21 @@ public class PedidoService implements IPedidoService {
     @Autowired
     private DetalleRepository detalleRepository;
 
+    //aqui solo se pasan las foraneas si señor JPA
+    // aqui el metodo esta distinto al controller estaba intentando enviar lal ista en el json del pedido
+    //la lista de productos
+    //si señor
+    //Si señor, no los entiendo del todo, si señor, bueno señor (optional)
+    //Bueno señor, entiendo
+    //son los DTO
+    //
+    //listo comun error
+    //
     @Override
     public Pedido crear(GuardarPedidoDTO guardarPedido) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, YaExisteEntidadExcepcion, DataIncorrectaExcepcion {
         guardarPedido.setPedido(new PedidoDTO());
         Pedido pedido = guardarPedido.getPedido().covertirPedido();
-        Iterable<Producto> productoLista = Producto.convertirListaDTOAProducto(guardarPedido.getProductos());
+       // Iterable<Producto> productoLista = Producto.convertirListaDTOAProducto(guardarPedido.getProductos());
         Empleado empleadoPorId = empleadoService.buscarPorId(guardarPedido.getEmpleadoId());
         pedido.setEmpleadoId(empleadoPorId);
         Mesa mesaPorId = mesaService.buscarPorId(guardarPedido.getMesaId());
@@ -54,7 +64,10 @@ public class PedidoService implements IPedidoService {
             pedido.setFechaPedido(new Date());
             pedido.setFechaCreacion(new Date());
             pedido.setFechaActualizacion(new Date());
-            List<DetallePedido> detallesPedido = new ArrayList<>();
+            return pedidoRepository.save(pedido);
+        }
+    }
+         /*   List<DetallePedido> detallesPedido = new ArrayList<>();
             final Pedido pedidoCreado = pedidoRepository.save(pedido);
             productoLista.forEach(productoActual -> {
                 DetallePedido detallePedido = new DetallePedido();
@@ -72,8 +85,17 @@ public class PedidoService implements IPedidoService {
             detalleRepository.saveAll(detallesPedido);
             return pedidoCreado;
         }
-    }
+    }*/
 
+ //singleton inicializacion / valor objeto
+ //utilizar builders
+ //si lombok No señor  to builder. set property(setear valors especificos de un objeto
+    // Data store guardar entidad
+    //plugins validar que datos en cada entidad son obligatorios (relacionar con data store)
+    //Bueno señor Si sñor
+    //jajaja si
+
+//cambio inyeccion depen
  /*   @Override
     public Pedido actualizar(Long id, Pedido pedido) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion {
         if (!pedido.sonCamposValidos()) {
@@ -132,7 +154,7 @@ public class PedidoService implements IPedidoService {
     }
 
     public List<Pedido> listarTodos() throws NoExisteEntidadExcepcion {
-        List<Pedido> pedidos = (List<Pedido>) pedidoRepository.findAll();
+        List<Pedido> pedidos =  pedidoRepository.findAllByActivo();
         if (pedidos.isEmpty()) {
             throw new NoExisteEntidadExcepcion("No hay pedidos registrados");
         } else {

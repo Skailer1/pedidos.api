@@ -2,6 +2,7 @@ package co.com.unibague.pedidos.repository;
 
 import co.com.unibague.pedidos.model.Pedido;
 import co.com.unibague.pedidos.model.Producto;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
@@ -14,4 +15,7 @@ public interface ProductoRepository extends CrudRepository<Producto, Long>
  //   List<Producto> findAllById(Long id);
 
     List<Producto> findAll();
+
+    @Query("SELECT u FROM Producto u WHERE u.tipoProducto = 2")
+    List<Producto> findAllByTipoProducto();
 }

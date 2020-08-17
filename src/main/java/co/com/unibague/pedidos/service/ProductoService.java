@@ -32,7 +32,7 @@ public class ProductoService implements IProductoService
 
     @Override
     public List<Producto> listarTodos() throws NoExisteEntidadExcepcion {
-        List<Producto> productos = productoRepository.findAll();
+        List<Producto> productos = productoRepository.findAllByTipoProducto();
         if (productos.isEmpty()) {
             throw new NoExisteEntidadExcepcion("No hay productos registrados");
         } else {
