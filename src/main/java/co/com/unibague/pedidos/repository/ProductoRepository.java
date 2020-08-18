@@ -16,6 +16,6 @@ public interface ProductoRepository extends CrudRepository<Producto, Long>
 
     List<Producto> findAll();
 
-    @Query("SELECT u FROM Producto u WHERE u.tipoProducto = 2")
-    List<Producto> findAllByTipoProducto();
+    @Query("SELECT u FROM Producto u WHERE u.tipoProducto.id = :tipoProductoId")
+    List<Producto> findAllByTipoProducto(Long tipoProductoId);
 }

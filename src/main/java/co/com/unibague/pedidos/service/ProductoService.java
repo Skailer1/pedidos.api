@@ -2,6 +2,7 @@ package co.com.unibague.pedidos.service;
 
 import co.com.unibague.pedidos.dto.GuardarProductoDTO;
 import co.com.unibague.pedidos.dto.ProductoDTO;
+import co.com.unibague.pedidos.model.Pedido;
 import co.com.unibague.pedidos.model.Producto;
 import co.com.unibague.pedidos.model.TipoProducto;
 import co.com.unibague.pedidos.repository.ProductoRepository;
@@ -31,8 +32,17 @@ public class ProductoService implements IProductoService
 
 
     @Override
+    public List<Producto> listarPorTipo(Long tipoProductoId) throws NoExisteEntidadExcepcion {
+        List<Producto> productos = productoRepository.findAllByTipoProducto(tipoProductoId);
+        if (productos.isEmpty()) {
+            throw new NoExisteEntidadExcepcion("No hay productos registrados");
+        } else {
+            return productos;
+        }
+    }
+
     public List<Producto> listarTodos() throws NoExisteEntidadExcepcion {
-        List<Producto> productos = productoRepository.findAllByTipoProducto();
+        List<Producto> productos =  productoRepository.findAll();
         if (productos.isEmpty()) {
             throw new NoExisteEntidadExcepcion("No hay productos registrados");
         } else {

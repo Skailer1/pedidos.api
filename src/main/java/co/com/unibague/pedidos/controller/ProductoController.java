@@ -24,10 +24,10 @@ public class ProductoController
     private IProductoService productoService;
 
 
-    @GetMapping(value = "producto", headers = "Accept=application/json")
-    public ResponseEntity<?> listarTodos() {
+    @GetMapping(value = "producto/tipo/{tipoProductoId}", headers = "Accept=application/json")
+    public ResponseEntity<?> listarPorTipo(@PathVariable Long tipoProductoId) {
         try {
-            return new ResponseEntity<>(productoService.listarTodos(), HttpStatus.OK);
+            return new ResponseEntity<>(productoService.listarPorTipo(tipoProductoId), HttpStatus.OK);
         } catch (NoExisteEntidadExcepcion noExisteEntidadExcepcion) {
             return new ResponseEntity<>(BaseResponse.builder()
                     .isCorrecto(false)
@@ -35,6 +35,20 @@ public class ProductoController
                     .build(), HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping(value = "producto", headers = "Accept=application/json")
+    public ResponseEntity<?> listarTodos() {
+        try {
+            return new ResponseEntity<>(productoService.listarTodos(), HttpStatus.OK);
+        } catch (NoExisteEntidadExcepcion noExisteEntidadExcepcion) {
+            return new ResponseEntity<>(RespuestaBaseDTO.builder()
+                    .codigoEstado(HttpStatus.NOT_FOUND.value())
+                    .mensaje(noExisteEntidadExcepcion.getMessage())
+                    .isCorrecto(false)
+                    .build(), HttpStatus.NOT_FOUND);
+        }
+    }
+
 
     @GetMapping(value = "producto/{id}", headers = "Accept=application/json")
     public ResponseEntity<?> buscarPorId(@PathVariable Long id) {

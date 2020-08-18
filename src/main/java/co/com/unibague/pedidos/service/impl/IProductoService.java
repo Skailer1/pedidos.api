@@ -1,7 +1,7 @@
 package co.com.unibague.pedidos.service.impl;
 
 
-import co.com.unibague.pedidos.dto.GuardarProductoDTO;
+
 import co.com.unibague.pedidos.model.Producto;
 import co.com.unibague.pedidos.service.exception.DataIncorrectaExcepcion;
 import co.com.unibague.pedidos.service.exception.EntidadInactivaExcepcion;
@@ -18,7 +18,10 @@ public interface IProductoService
 
     //boolean eliminar(Long id) throws NoExisteEntidadExcepcion, EntidadInactivaExcepcion;  por que los otros si funcionan con el iterable amigo ?
 
-    List<Producto> listarTodos()throws NoExisteEntidadExcepcion;
+    List<Producto> listarPorTipo(Long tipoProductoId)throws NoExisteEntidadExcepcion;
+
+    List<Producto> listarTodos() throws NoExisteEntidadExcepcion;
+
 
     Producto buscarPorId(Long id) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion;
 }

@@ -10,6 +10,7 @@ import co.com.unibague.pedidos.service.exception.YaExisteEntidadExcepcion;
 import co.com.unibague.pedidos.service.impl.IUsuarioService;
 import co.com.unibague.pedidos.util.ValidacionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -21,6 +22,10 @@ public class UsuarioService implements IUsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+
     @Override
     public Usuario crear(Usuario usuario) throws YaExisteEntidadExcepcion, DataIncorrectaExcepcion {
         if (!usuario.sonCamposValidos()) {
@@ -28,6 +33,7 @@ public class UsuarioService implements IUsuarioService {
         } else if (usuarioRepository.findByCorreo(usuario.getCorreo()).isPresent()) {
             throw new YaExisteEntidadExcepcion("Ya existe un ususario con ese correo");
         } else {
+            usuario.setContrasenia(passwordEncoder.encode(usuario.getContrasenia()));
             usuario.setFechaCreacion(new Date());
             usuario.setFechaActualizacion(new Date());
             usuario.setActivo(true);
