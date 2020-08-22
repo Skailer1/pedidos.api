@@ -54,6 +54,12 @@ public class DetallePedido implements Serializable
     @Column(name = "is_activo")
     private boolean isActivo;
 
+    @Column(name = "pedido_id")
+    private  Long pedidoId;
+
+    @Column(name = "producto_id")
+    private  Long productoId;
+
 
     public boolean sonCamposValidos() {
         return cantidad >0 &&

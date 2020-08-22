@@ -22,7 +22,7 @@ public class PedidoController {
     private IPedidoService pedidoService;
 
     @PostMapping(value = "pedido", headers = "Accept=application/json")
-    public ResponseEntity<?> crear(@RequestBody GuardarPedidoDTO pedido ) {
+    public ResponseEntity<?> crear(@RequestBody GuardarPedidoDTO pedido) {
         try {
             return new ResponseEntity<>(pedidoService.crear(pedido), HttpStatus.CREATED);
         } catch (YaExisteEntidadExcepcion | DataIncorrectaExcepcion | EntidadInactivaExcepcion exception) {
@@ -39,11 +39,7 @@ public class PedidoController {
                     .build(), HttpStatus.NOT_FOUND);
         }
     }
-//este es el pedido controller sin actualizar este solo creaba un pedido
-    //NO señor
-    //como hacer la inyeccion de dependencia a traves del constructor
-    //bueno señor
-    // las respuestas son distintas
+
 
    /* @PutMapping(value = "pedido/{id}", headers = "Accept=application/json")
     public ResponseEntity<?> actualizar(@PathVariable long id, @RequestBody PedidoDTO pedido) {

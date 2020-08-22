@@ -69,16 +69,7 @@ public class Producto implements Serializable {
                 iva > 0;
     }
 
-    //mire en google como se recorre un iterable
-    //si amigo estoy mirando desde el telefono
-    //antes fel for debe crear un Iterable<Producto> y en ese iterable va al almacenando , asumo que en ProductoDTO ya tiene el método de convertir Si amigo ProdcutoDTO a Producto
-    // la inicializo con que amigo ? paso el repository ?
-    //nada de eso amigo, echele mente. Tiene una lista y lo unico que tiene que hacer es convertir esa misma lista a una nueva
-    //simplemente inicie esa variable con new Iterable<>()
-    //la lista que recorro en el for es esa de tipo Producto o la de ProductoDTO?
-    ////cuál cree usted amigo? tengo que convertir cada DTO a producto no ? la DTO, sisa
-    //Listo
-    //este es el que paso en el service cierto
+
     public static Iterable<Producto> convertirListaDTOAProducto(List<ProductoDTO> listaConvertir) {
         List<Producto> productosConver = new ArrayList<>();
         for (ProductoDTO producto : listaConvertir) {

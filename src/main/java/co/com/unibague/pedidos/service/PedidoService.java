@@ -23,8 +23,8 @@ import java.util.Optional;
 public class PedidoService implements IPedidoService {
     @Autowired
     private PedidoRepository pedidoRepository;
-    //@Autowired
-    //private PedidoRepository productoRepository;
+    @Autowired
+    private PedidoRepository productoRepository;
     @Autowired
     private IEmpleadoService empleadoService;
     @Autowired
@@ -48,7 +48,7 @@ public class PedidoService implements IPedidoService {
     public Pedido crear(GuardarPedidoDTO guardarPedido) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, YaExisteEntidadExcepcion, DataIncorrectaExcepcion {
         guardarPedido.setPedido(new PedidoDTO());
         Pedido pedido = guardarPedido.getPedido().covertirPedido();
-       // Iterable<Producto> productoLista = Producto.convertirListaDTOAProducto(guardarPedido.getProductos());
+        //Iterable<Producto> productoLista = Producto.convertirListaDTOAProducto(guardarPedido.getProductos());
         Empleado empleadoPorId = empleadoService.buscarPorId(guardarPedido.getEmpleadoId());
         pedido.setEmpleadoId(empleadoPorId);
         Mesa mesaPorId = mesaService.buscarPorId(guardarPedido.getMesaId());
@@ -64,28 +64,32 @@ public class PedidoService implements IPedidoService {
             pedido.setFechaPedido(new Date());
             pedido.setFechaCreacion(new Date());
             pedido.setFechaActualizacion(new Date());
-            return pedidoRepository.save(pedido);
+
         }
-    }
-         /*   List<DetallePedido> detallesPedido = new ArrayList<>();
+
+         List<DetallePedido> detallesPedido = new ArrayList<>();
             final Pedido pedidoCreado = pedidoRepository.save(pedido);
-            productoLista.forEach(productoActual -> {
+            guardarPedido.getDetalles().forEach(detalleActual -> {
+                Producto producto = new Producto();
+                producto.setId(detalleActual.getProducto());
                 DetallePedido detallePedido = new DetallePedido();
-                detallePedido.setProducto(productoActual);
-                detallePedido.setPedido(pedidoCreado);
+                detallePedido.setProductoId(producto.getId());
+                detallePedido.setPedido(pedido);
+                detallePedido.setPedidoId(pedido.getId());
                 detallePedido.setActivo(true);
                 detallePedido.setFechaCreacion(new Date());
                 detallePedido.setFechaActualizacion(new Date());
-                detallePedido.setCantidad(cantidad));
-                detallePedido.setValorUnitario(ValorUnitario);
-                detallePedido.setTotal(total);
+                detallePedido.setCantidad(detalleActual.getDetalle().getCantidad());
+                detallePedido.setValorUnitario(detalleActual.getDetalle().getValorUnitario());
+                double subtotal = detalleActual.getDetalle().getCantidad() * detalleActual.getDetalle().getValorUnitario();
+                detallePedido.setTotal(subtotal);
                 detallesPedido.add(detallePedido);
             });
 
-            detalleRepository.saveAll(detallesPedido);
+             detalleRepository.saveAll(detallesPedido);
             return pedidoCreado;
-        }
-    }*/
+
+    }
 
  //singleton inicializacion / valor objeto
  //utilizar builders
