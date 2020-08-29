@@ -42,15 +42,20 @@ public class Pedido implements Serializable
     @Basic(optional = false)
     @Column(name = "is_activo")
     private boolean isActivo;
-    @JoinColumn(name = "empleado_id", referencedColumnName = "id")
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Empleado empleadoId;
+    private Usuario usuarioId;
     @JoinColumn(name = "mesa_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Mesa mesaId;
-    @JoinColumn(name = "estado_id", referencedColumnName = "id")
+   /* @JoinColumn(name = "estado_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private EstadoPedido estadoId;
+    private EstadoPedido estadoId;*/
+
+
+  /*  @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido")
+    private List<DetallePedido> detallePedidoList;*/
+
 
   /*  @OneToMany
     private List<Producto> listaProductos;*/
@@ -60,8 +65,6 @@ public class Pedido implements Serializable
     */
 
   /*
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido")
-    private List<DetallePedido> detallePedidoList;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido")
     private List<EstadoPorPedidoRepository> estadoPorPedidoList; */

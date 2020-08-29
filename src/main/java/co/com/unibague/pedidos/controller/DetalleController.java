@@ -39,10 +39,10 @@ public class DetalleController
     }
 
 
-    @GetMapping(value = "detalle", headers = "Accept=application/json")
-    public ResponseEntity<?> listarTodos() {
+    @GetMapping(value = "detalle/pedido/{pedidoIdP}", headers = "Accept=application/json")
+    public ResponseEntity<?> listarPorPedido(@PathVariable Long pedidoIdP) {
         try {
-            return new ResponseEntity<>(detalleService.listarTodos(), HttpStatus.OK);
+            return new ResponseEntity<>(detalleService.listarPorPedido(pedidoIdP), HttpStatus.OK);
         } catch (NoExisteEntidadExcepcion noExisteEntidadExcepcion) {
             return new ResponseEntity<>(RespuestaBaseDTO.builder()
                     .codigoEstado(HttpStatus.NOT_FOUND.value())

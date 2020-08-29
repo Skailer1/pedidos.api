@@ -27,7 +27,6 @@ public class EmpleadoService implements IEmpleadoService {
     @Autowired
     private EmpleadoRepository empleadoRepository;
 
-
     @Autowired
     private IUsuarioService usuarioService;
  /*   @Autowired

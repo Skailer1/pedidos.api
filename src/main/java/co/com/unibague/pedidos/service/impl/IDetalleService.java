@@ -18,7 +18,7 @@ public interface IDetalleService
 
    boolean eliminar(Long id) throws NoExisteEntidadExcepcion, EntidadInactivaExcepcion;
 
-    List<DetallePedido> listarTodos() throws NoExisteEntidadExcepcion;
+    List<DetallePedido> listarPorPedido(Long pedidoIdP) throws NoExisteEntidadExcepcion;
 
 
     DetallePedido buscarPorId(Long id) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion;

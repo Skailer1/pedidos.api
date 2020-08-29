@@ -7,10 +7,7 @@ import co.com.unibague.pedidos.model.*;
 import co.com.unibague.pedidos.repository.DetalleRepository;
 import co.com.unibague.pedidos.repository.PedidoRepository;
 import co.com.unibague.pedidos.service.exception.*;
-import co.com.unibague.pedidos.service.impl.IEmpleadoService;
-import co.com.unibague.pedidos.service.impl.IEstadoService;
-import co.com.unibague.pedidos.service.impl.IMesaService;
-import co.com.unibague.pedidos.service.impl.IPedidoService;
+import co.com.unibague.pedidos.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,35 +23,27 @@ public class PedidoService implements IPedidoService {
     @Autowired
     private PedidoRepository productoRepository;
     @Autowired
-    private IEmpleadoService empleadoService;
+    private IUsuarioService usuarioService;
     @Autowired
     private IMesaService mesaService;
-    @Autowired
-    private IEstadoService estadoService;
+    //@Autowired
+    //private IEstadoService estadoService;
     @Autowired
     private DetalleRepository detalleRepository;
 
-    //aqui solo se pasan las foraneas si señor JPA
-    // aqui el metodo esta distinto al controller estaba intentando enviar lal ista en el json del pedido
-    //la lista de productos
-    //si señor
-    //Si señor, no los entiendo del todo, si señor, bueno señor (optional)
-    //Bueno señor, entiendo
-    //son los DTO
-    //
-    //listo comun error
+
     //
     @Override
     public Pedido crear(GuardarPedidoDTO guardarPedido) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, YaExisteEntidadExcepcion, DataIncorrectaExcepcion {
         guardarPedido.setPedido(new PedidoDTO());
         Pedido pedido = guardarPedido.getPedido().covertirPedido();
         //Iterable<Producto> productoLista = Producto.convertirListaDTOAProducto(guardarPedido.getProductos());
-        Empleado empleadoPorId = empleadoService.buscarPorId(guardarPedido.getEmpleadoId());
-        pedido.setEmpleadoId(empleadoPorId);
+        Usuario usuarioPorId = usuarioService.buscarPorId(guardarPedido.getUsuarioId());
+        pedido.setUsuarioId(usuarioPorId);
         Mesa mesaPorId = mesaService.buscarPorId(guardarPedido.getMesaId());
         pedido.setMesaId(mesaPorId);
-        EstadoPedido estadoPorId = estadoService.buscarPorId(guardarPedido.getEstadoId());
-        pedido.setEstadoId(estadoPorId);
+     //   EstadoPedido estadoPorId = estadoService.buscarPorId(guardarPedido.getEstadoId());
+      //  pedido.setEstadoId(estadoPorId);
         if (!pedido.sonCamposValidos()) {
             throw new DataIncorrectaExcepcion("Verifique la información enviada");
         }
@@ -66,28 +55,28 @@ public class PedidoService implements IPedidoService {
             pedido.setFechaActualizacion(new Date());
 
         }
+        List<DetallePedido> detallesPedido = new ArrayList<>();
+        final Pedido pedidoCreado = pedidoRepository.save(pedido);
+        guardarPedido.getDetalles().forEach(detalleActual -> {
+            Producto producto = new Producto();
+            producto.setId(detalleActual.getProducto());
+            DetallePedido detallePedido = new DetallePedido();
+            detallePedido.setProductoId(producto.getId());
+            detallePedido.setPedido(pedido);
+            detallePedido.setPedidoId(pedido.getId());
+            detallePedido.setActivo(true);
+            detallePedido.setFechaCreacion(new Date());
+            detallePedido.setFechaActualizacion(new Date());
+            detallePedido.setCantidad(detalleActual.getDetalle().getCantidad());
+            detallePedido.setValorUnitario(detalleActual.getDetalle().getValorUnitario());
+            double subtotal = detalleActual.getDetalle().getCantidad() * detalleActual.getDetalle().getValorUnitario();
+            detallePedido.setTotal(subtotal);
+            detallesPedido.add(detallePedido);
+        });
 
-         List<DetallePedido> detallesPedido = new ArrayList<>();
-            final Pedido pedidoCreado = pedidoRepository.save(pedido);
-            guardarPedido.getDetalles().forEach(detalleActual -> {
-                Producto producto = new Producto();
-                producto.setId(detalleActual.getProducto());
-                DetallePedido detallePedido = new DetallePedido();
-                detallePedido.setProductoId(producto.getId());
-                detallePedido.setPedido(pedido);
-                detallePedido.setPedidoId(pedido.getId());
-                detallePedido.setActivo(true);
-                detallePedido.setFechaCreacion(new Date());
-                detallePedido.setFechaActualizacion(new Date());
-                detallePedido.setCantidad(detalleActual.getDetalle().getCantidad());
-                detallePedido.setValorUnitario(detalleActual.getDetalle().getValorUnitario());
-                double subtotal = detalleActual.getDetalle().getCantidad() * detalleActual.getDetalle().getValorUnitario();
-                detallePedido.setTotal(subtotal);
-                detallesPedido.add(detallePedido);
-            });
+        detalleRepository.saveAll(detallesPedido);
+        return pedidoCreado;
 
-             detalleRepository.saveAll(detallesPedido);
-            return pedidoCreado;
 
     }
 
@@ -157,6 +146,7 @@ public class PedidoService implements IPedidoService {
 
     }
 
+
     public List<Pedido> listarTodos() throws NoExisteEntidadExcepcion {
         List<Pedido> pedidos =  pedidoRepository.findAllByActivo();
         if (pedidos.isEmpty()) {
@@ -165,6 +155,18 @@ public class PedidoService implements IPedidoService {
             return pedidos;
         }
     }
+
+    public List<DetallePedido> listarPorPedido(Long pedidoIdP) throws NoExisteEntidadExcepcion {
+        List<DetallePedido> detalles = pedidoRepository.findAllByPedido(pedidoIdP);
+        if (detalles.isEmpty()) {
+            throw new NoExisteEntidadExcepcion("No hay detalle registrados");
+        }
+        else {
+            return detalles;
+        }
+    }
+
+
 //est
   /*  @Override
     public List<Pedido> listarTodos() throws NoExisteEntidadExcepcion {

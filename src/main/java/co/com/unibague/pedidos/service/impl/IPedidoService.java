@@ -1,6 +1,7 @@
 package co.com.unibague.pedidos.service.impl;
 
 import co.com.unibague.pedidos.dto.GuardarPedidoDTO;
+import co.com.unibague.pedidos.model.DetallePedido;
 import co.com.unibague.pedidos.model.Pedido;
 import co.com.unibague.pedidos.model.Producto;
 import co.com.unibague.pedidos.service.exception.*;
@@ -14,6 +15,10 @@ public interface IPedidoService
    // Pedido actualizar(Long id, Pedido pedido) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion;
 
     List<Pedido> listarTodos() throws NoExisteEntidadExcepcion;
+
+   // List<Pedido> listarTodosDetalles() throws NoExisteEntidadExcepcion;
+
+    List<DetallePedido> listarPorPedido(Long pedidoIdP) throws NoExisteEntidadExcepcion;
 
     // Map<Product, Integer> getProductsInCart();
 

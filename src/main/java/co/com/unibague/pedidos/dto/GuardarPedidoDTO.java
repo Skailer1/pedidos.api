@@ -14,8 +14,7 @@ import java.util.List;
 @Builder
 public class GuardarPedidoDTO {
     private Long mesaId;
-    private Long empleadoId;
-    private Long estadoId;
+    private Long usuarioId;
     private List <GuardarDetalleDTO> detalles;
     private PedidoDTO pedido = new PedidoDTO();
 

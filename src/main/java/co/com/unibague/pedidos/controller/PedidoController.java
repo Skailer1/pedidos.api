@@ -21,6 +21,8 @@ public class PedidoController {
     @Autowired
     private IPedidoService pedidoService;
 
+
+
     @PostMapping(value = "pedido", headers = "Accept=application/json")
     public ResponseEntity<?> crear(@RequestBody GuardarPedidoDTO pedido) {
         try {
@@ -41,7 +43,22 @@ public class PedidoController {
     }
 
 
-   /* @PutMapping(value = "pedido/{id}", headers = "Accept=application/json")
+    @GetMapping(value = "pedido/detalle/{pedidoIdP}", headers = "Accept=application/json")
+    public ResponseEntity<?> listarPorPedido(@PathVariable Long pedidoIdP) {
+        try {
+            return new ResponseEntity<>(pedidoService.listarPorPedido(pedidoIdP), HttpStatus.OK);
+        } catch (NoExisteEntidadExcepcion noExisteEntidadExcepcion) {
+            return new ResponseEntity<>(RespuestaBaseDTO.builder()
+                    .codigoEstado(HttpStatus.NOT_FOUND.value())
+                    .mensaje(noExisteEntidadExcepcion.getMessage())
+                    .isCorrecto(false)
+                    .build(), HttpStatus.NOT_FOUND);
+        }
+    }
+
+
+
+    /* @PutMapping(value = "pedido/{id}", headers = "Accept=application/json")
     public ResponseEntity<?> actualizar(@PathVariable long id, @RequestBody PedidoDTO pedido) {
         try {
             return new ResponseEntity<>(pedidoService.actualizar(id, pedido.covertirPedido()), HttpStatus.OK);
@@ -79,8 +96,19 @@ public class PedidoController {
        }
    }
 
-
-
+  /*  @GetMapping(value = "pedido/detalles", headers = "Accept=application/json")
+    public ResponseEntity<?> listarTodosDetalles() {
+        try {
+            return new ResponseEntity<>(pedidoService.listarTodosDetalles(), HttpStatus.OK);
+        } catch (NoExisteEntidadExcepcion noExisteEntidadExcepcion) {
+            return new ResponseEntity<>(RespuestaBaseDTO.builder()
+                    .codigoEstado(HttpStatus.NOT_FOUND.value())
+                    .mensaje(noExisteEntidadExcepcion.getMessage())
+                    .isCorrecto(false)
+                    .build(), HttpStatus.NOT_FOUND);
+        }
+    }
+*/
 
     @GetMapping(value = "pedido/{id}", headers = "Accept=application/json")
     public ResponseEntity<?> buscarPorId(@PathVariable Long id) {

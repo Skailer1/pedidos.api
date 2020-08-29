@@ -90,8 +90,8 @@ public class DetalleService implements IDetalleService
 
 
 
-    public List<DetallePedido> listarTodos() throws NoExisteEntidadExcepcion {
-        List<DetallePedido> detalles = (List<DetallePedido>) detalleRepository.findAll();
+    public List<DetallePedido> listarPorPedido(Long pedidoIdP) throws NoExisteEntidadExcepcion {
+        List<DetallePedido> detalles = detalleRepository.findAllByPedido(pedidoIdP);
         if (detalles.isEmpty()) {
             throw new NoExisteEntidadExcepcion("No hay detalle registrados");
         }

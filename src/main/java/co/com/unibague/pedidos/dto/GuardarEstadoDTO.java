@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class GuardarEstadoDTO
 {
-    private Long pedidoId;
+  //  private Long pedidoId;
     private Long estadoId;
 }
