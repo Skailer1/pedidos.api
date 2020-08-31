@@ -22,8 +22,8 @@ public class UsuarioService implements IUsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+  //  @Autowired
+  //  private PasswordEncoder passwordEncoder;
 
 
     @Override
@@ -33,7 +33,7 @@ public class UsuarioService implements IUsuarioService {
         } else if (usuarioRepository.findByCorreo(usuario.getCorreo()).isPresent()) {
             throw new YaExisteEntidadExcepcion("Ya existe un ususario con ese correo");
         } else {
-            usuario.setContrasenia(passwordEncoder.encode(usuario.getContrasenia()));
+    //        usuario.setContrasenia(passwordEncoder.encode(usuario.getContrasenia()));
             usuario.setFechaCreacion(new Date());
             usuario.setFechaActualizacion(new Date());
             usuario.setActivo(true);
