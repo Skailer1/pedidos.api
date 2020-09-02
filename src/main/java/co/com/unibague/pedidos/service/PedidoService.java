@@ -155,14 +155,14 @@ public class PedidoService implements IPedidoService {
         }
     }
 
-    public String listarPorPedido(Long pedidoIdP) throws NoExisteEntidadExcepcion {
+    public List<DetallePedido> listarPorPedido(Long pedidoIdP) throws NoExisteEntidadExcepcion {
 
         List<DetallePedido> detalles = pedidoRepository.findAllByPedido(pedidoIdP);
         if (detalles.isEmpty()) {
             throw new NoExisteEntidadExcepcion("No hay detalle registrados");
         }
         else {
-            return detalles.toString();
+            return detalles;
         }
     }
 
