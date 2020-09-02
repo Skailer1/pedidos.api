@@ -2,7 +2,6 @@ package co.com.unibague.pedidos.service;
 
 import co.com.unibague.pedidos.dto.GuardarPedidoDTO;
 import co.com.unibague.pedidos.dto.PedidoDTO;
-import co.com.unibague.pedidos.dto.ProductoDTO;
 import co.com.unibague.pedidos.model.*;
 import co.com.unibague.pedidos.repository.DetalleRepository;
 import co.com.unibague.pedidos.repository.PedidoRepository;
@@ -156,13 +155,14 @@ public class PedidoService implements IPedidoService {
         }
     }
 
-    public List<DetallePedido> listarPorPedido(Long pedidoIdP) throws NoExisteEntidadExcepcion {
+    public String listarPorPedido(Long pedidoIdP) throws NoExisteEntidadExcepcion {
+
         List<DetallePedido> detalles = pedidoRepository.findAllByPedido(pedidoIdP);
         if (detalles.isEmpty()) {
             throw new NoExisteEntidadExcepcion("No hay detalle registrados");
         }
         else {
-            return detalles;
+            return detalles.toString();
         }
     }
 

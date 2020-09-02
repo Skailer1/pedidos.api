@@ -1,5 +1,5 @@
 package co.com.unibague.pedidos.model;
-import co.com.unibague.pedidos.enums.TipoPago;
+import co.com.unibague.pedidos.model.enums.TipoPago;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 
 @Data
 @AllArgsConstructor

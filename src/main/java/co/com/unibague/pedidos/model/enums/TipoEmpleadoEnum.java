@@ -1,4 +1,4 @@
-package co.com.unibague.pedidos.enums;
+package co.com.unibague.pedidos.model.enums;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

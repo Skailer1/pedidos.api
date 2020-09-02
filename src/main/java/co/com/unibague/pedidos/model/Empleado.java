@@ -1,9 +1,9 @@
 package co.com.unibague.pedidos.model;
 
-import co.com.unibague.pedidos.enums.RH;
-import co.com.unibague.pedidos.enums.Sexo;
-import co.com.unibague.pedidos.enums.TipoDocumentoEnum;
-import co.com.unibague.pedidos.enums.TipoEmpleadoEnum;
+import co.com.unibague.pedidos.model.enums.RH;
+import co.com.unibague.pedidos.model.enums.Sexo;
+import co.com.unibague.pedidos.model.enums.TipoDocumentoEnum;
+import co.com.unibague.pedidos.model.enums.TipoEmpleadoEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

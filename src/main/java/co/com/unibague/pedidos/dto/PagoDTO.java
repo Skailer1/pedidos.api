@@ -1,7 +1,6 @@
 package co.com.unibague.pedidos.dto;
-import co.com.unibague.pedidos.enums.TipoPago;
+import co.com.unibague.pedidos.model.enums.TipoPago;
 import co.com.unibague.pedidos.model.Pago;
-import co.com.unibague.pedidos.model.Pedido;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

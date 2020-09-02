@@ -1,15 +1,14 @@
 package co.com.unibague.pedidos.controller;
 
 import co.com.unibague.pedidos.dto.GuardarPedidoDTO;
-import co.com.unibague.pedidos.dto.PedidoDTO;
 import co.com.unibague.pedidos.dto.RespuestaBaseDTO;
-import co.com.unibague.pedidos.model.Pedido;
-import co.com.unibague.pedidos.response.BaseResponse;
 import co.com.unibague.pedidos.service.exception.DataIncorrectaExcepcion;
 import co.com.unibague.pedidos.service.exception.EntidadInactivaExcepcion;
 import co.com.unibague.pedidos.service.exception.NoExisteEntidadExcepcion;
 import co.com.unibague.pedidos.service.exception.YaExisteEntidadExcepcion;
 import co.com.unibague.pedidos.service.impl.IPedidoService;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import jdk.nashorn.internal.runtime.JSONFunctions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,6 +46,7 @@ public class PedidoController {
     public ResponseEntity<?> listarPorPedido(@PathVariable Long pedidoIdP) {
         try {
             return new ResponseEntity<>(pedidoService.listarPorPedido(pedidoIdP), HttpStatus.OK);
+
         } catch (NoExisteEntidadExcepcion noExisteEntidadExcepcion) {
             return new ResponseEntity<>(RespuestaBaseDTO.builder()
                     .codigoEstado(HttpStatus.NOT_FOUND.value())

@@ -1,6 +1,5 @@
 package co.com.unibague.pedidos.repository;
 
-import co.com.unibague.pedidos.enums.DescripcionEstado;
 import co.com.unibague.pedidos.model.EstadoPedido;
 
 import org.springframework.data.repository.CrudRepository;

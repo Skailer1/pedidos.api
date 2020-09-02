@@ -1,7 +1,5 @@
 package co.com.unibague.pedidos.dto;
 
-import co.com.unibague.pedidos.enums.RH;
-import co.com.unibague.pedidos.enums.Sexo;
 import co.com.unibague.pedidos.model.TipoDocumento;
 import lombok.*;
 

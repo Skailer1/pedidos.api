@@ -1,7 +1,7 @@
 package co.com.unibague.pedidos.controller;
 
 
-import co.com.unibague.pedidos.response.BaseResponse;
+import co.com.unibague.pedidos.util.response.BaseResponse;
 import co.com.unibague.pedidos.service.exception.NoExisteEntidadExcepcion;
 import co.com.unibague.pedidos.service.impl.ITipoDocumentoService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -7,8 +7,6 @@ import co.com.unibague.pedidos.config.UserRequest;
 import co.com.unibague.pedidos.dto.CambiarContraseniaDTO;
 import co.com.unibague.pedidos.dto.RespuestaBaseDTO;
 import co.com.unibague.pedidos.dto.UsuarioDTO;
-import co.com.unibague.pedidos.model.Usuario;
-import co.com.unibague.pedidos.response.BaseResponse;
 import co.com.unibague.pedidos.service.exception.DataIncorrectaExcepcion;
 import co.com.unibague.pedidos.service.exception.EntidadInactivaExcepcion;
 import co.com.unibague.pedidos.service.exception.NoExisteEntidadExcepcion;
