@@ -42,7 +42,7 @@ public class PedidoController {
     }
 
 
-    @GetMapping(value = "pedido/detalle/{pedidoIdP}", headers = "Accept=application/json")
+    @PostMapping(value = "pedido/detalle/{pedidoIdP}", headers = "Accept=application/json")
     public ResponseEntity<?> listarPorPedido(@PathVariable Long pedidoIdP) {
         try {
             return new ResponseEntity<>(pedidoService.listarPorPedido(pedidoIdP), HttpStatus.OK);
