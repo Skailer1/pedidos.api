@@ -29,7 +29,7 @@ public class Pedido implements Serializable
     @Basic(optional = false)
     @Column(name = "fecha_pedido")
     @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
+   // @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
     private Date fechaPedido;
     @Basic(optional = false)
     @Column(name = "fecha_actualizacion")
@@ -42,24 +42,37 @@ public class Pedido implements Serializable
     @Basic(optional = false)
     @Column(name = "is_activo")
     private boolean isActivo;
-    @JoinColumn(name = "empleado_id", referencedColumnName = "id")
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Empleado empleadoId;
+    private Usuario usuarioId;
     @JoinColumn(name = "mesa_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Mesa mesaId;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "pedidoId")
+   /* @JoinColumn(name = "estado_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private EstadoPedido estadoId;*/
+
+
+  /*  @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido")
+    private List<DetallePedido> detallePedidoList;*/
+
+
+  /*  @OneToMany
+    private List<Producto> listaProductos;*/
+   /* @OneToOne(cascade = CascadeType.ALL, mappedBy = "pedidoId")
     private Pago pago;
 
+    */
+
   /*
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido")
-    private List<DetallePedido> detallePedidoList;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido")
     private List<EstadoPorPedidoRepository> estadoPorPedidoList; */
 
     public boolean sonCamposValidos() {
-        return fechaPedido != null ;
+        return fechaPedido != null   ;
     }
+
+
 
 }

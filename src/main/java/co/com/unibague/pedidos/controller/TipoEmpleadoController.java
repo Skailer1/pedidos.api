@@ -1,6 +1,6 @@
 package co.com.unibague.pedidos.controller;
 
-import co.com.unibague.pedidos.response.BaseResponse;
+import co.com.unibague.pedidos.util.response.BaseResponse;
 import co.com.unibague.pedidos.service.exception.NoExisteEntidadExcepcion;
 import co.com.unibague.pedidos.service.impl.ITipoEmpleadoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("v1")
-public class TipoEmpleadoController {
+public class    TipoEmpleadoController {
     @Autowired
     private ITipoEmpleadoService tipoEmpleadoService;
 

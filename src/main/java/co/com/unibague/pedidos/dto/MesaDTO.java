@@ -16,6 +16,7 @@ public class MesaDTO
 {
     private Long id;
     private String nombreMesa;
+    private String imagenUrl;
     private boolean isActivo;
     private Date fechaCreacion;
     private Date fechaActualizacion;
@@ -24,6 +25,7 @@ public class MesaDTO
         return Mesa.builder()
                 .id(id)
                 .nombreMesa(nombreMesa)
+                .imagenUrl(imagenUrl)
                 .isActivo(isActivo)
                 .fechaActualizacion(new Date())
                 .build();

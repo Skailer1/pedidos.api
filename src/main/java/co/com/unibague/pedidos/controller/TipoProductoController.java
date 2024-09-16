@@ -1,13 +1,7 @@
 package co.com.unibague.pedidos.controller;
 
-import co.com.unibague.pedidos.dto.RespuestaBaseDTO;
-import co.com.unibague.pedidos.dto.TipoProductoDTO;
-import co.com.unibague.pedidos.model.TipoProducto;
-import co.com.unibague.pedidos.response.BaseResponse;
-import co.com.unibague.pedidos.service.exception.DataIncorrectaExcepcion;
-import co.com.unibague.pedidos.service.exception.EntidadInactivaExcepcion;
+import co.com.unibague.pedidos.util.response.BaseResponse;
 import co.com.unibague.pedidos.service.exception.NoExisteEntidadExcepcion;
-import co.com.unibague.pedidos.service.exception.YaExisteEntidadExcepcion;
 import co.com.unibague.pedidos.service.impl.ITipoProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

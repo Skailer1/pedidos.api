@@ -1,9 +1,7 @@
 package co.com.unibague.pedidos.controller;
 
 import co.com.unibague.pedidos.dto.GuardarPagoDTO;
-import co.com.unibague.pedidos.dto.PagoDTO;
 import co.com.unibague.pedidos.dto.RespuestaBaseDTO;
-import co.com.unibague.pedidos.response.BaseResponse;
 import co.com.unibague.pedidos.service.exception.DataIncorrectaExcepcion;
 import co.com.unibague.pedidos.service.exception.EntidadInactivaExcepcion;
 import co.com.unibague.pedidos.service.exception.NoExisteEntidadExcepcion;

@@ -10,11 +10,11 @@ import java.util.List;
 
 public interface ITipoDocumentoService {
 
-    TipoDocumento crear(TipoDocumento tipoDocumento) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion, YaExisteEntidadExcepcion;
+  //  TipoDocumento crear(TipoDocumento tipoDocumento) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion, YaExisteEntidadExcepcion;
 
-    TipoDocumento actualizar(Long id, TipoDocumento tipoDocumento) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion;
+  //  TipoDocumento actualizar(Long id, TipoDocumento tipoDocumento) throws EntidadInactivaExcepcion, NoExisteEntidadExcepcion, DataIncorrectaExcepcion;
 
-    boolean eliminar(Long id) throws NoExisteEntidadExcepcion, EntidadInactivaExcepcion;
+  //  boolean eliminar(Long id) throws NoExisteEntidadExcepcion, EntidadInactivaExcepcion;
 
     List<TipoDocumento> listarTodos() throws NoExisteEntidadExcepcion;
 

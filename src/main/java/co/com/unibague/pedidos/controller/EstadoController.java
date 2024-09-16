@@ -2,12 +2,10 @@ package co.com.unibague.pedidos.controller;
 
 import co.com.unibague.pedidos.dto.RespuestaBaseDTO;
 import co.com.unibague.pedidos.dto.EstadoDTO;
-import co.com.unibague.pedidos.model.EstadoPedido;
-import co.com.unibague.pedidos.response.BaseResponse;
+import co.com.unibague.pedidos.util.response.BaseResponse;
 import co.com.unibague.pedidos.service.exception.DataIncorrectaExcepcion;
 import co.com.unibague.pedidos.service.exception.EntidadInactivaExcepcion;
 import co.com.unibague.pedidos.service.exception.NoExisteEntidadExcepcion;
-import co.com.unibague.pedidos.service.exception.YaExisteEntidadExcepcion;
 import co.com.unibague.pedidos.service.impl.IEstadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,11 +21,11 @@ public class EstadoController
     @Autowired
     private IEstadoService estadoService;
 
-  /*  @PostMapping(value = "estado", headers = "Accept=application/json")
+    @PostMapping(value = "estado", headers = "Accept=application/json")
     public ResponseEntity<?> crear(@RequestBody EstadoDTO estado) {
         try {
             return new ResponseEntity<>(estadoService.crear(estado.covertirEstado()), HttpStatus.CREATED);
-        } catch (YaExisteEntidadExcepcion | DataIncorrectaExcepcion exception ) {
+        } catch (/*YaExisteEntidadExcepcion |*/ DataIncorrectaExcepcion exception ) {
             return new ResponseEntity<>(RespuestaBaseDTO.builder()
                     .codigoEstado(HttpStatus.CONFLICT.value())
                     .mensaje(exception.getMessage())
@@ -38,35 +36,23 @@ public class EstadoController
     }
 
     @PutMapping(value = "estado/{id}", headers = "Accept=application/json")
-    public ResponseEntity<?> actualizar(@PathVariable long id, @RequestBody EstadoDTO estado) {
+    public ResponseEntity<?> actualizar(@PathVariable Long id, @RequestBody EstadoDTO estado) {
         try {
-            return new ResponseEntity<>(estadoService.actualizar(id, estado.covertirEstado()), HttpStatus.OK);
-        } catch (EntidadInactivaExcepcion entidadInactivaExcepcion) {
-            return new ResponseEntity<>(RespuestaBaseDTO.builder()
-                    .codigoEstado(HttpStatus.CONFLICT.value())
-                    .mensaje(entidadInactivaExcepcion.getMessage())
-                    .build(), HttpStatus.CONFLICT);
-        } catch (NoExisteEntidadExcepcion noExisteEntidadExcepcion) {
-            return new ResponseEntity<>(RespuestaBaseDTO.builder()
-                    .codigoEstado(HttpStatus.NOT_FOUND.value())
-                    .mensaje(noExisteEntidadExcepcion.getMessage())
+            return new ResponseEntity<>(estadoService.actualizar(id, estado), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(BaseResponse.builder()
                     .isCorrecto(false)
-                    .build(), HttpStatus.NOT_FOUND);
-        } catch (DataIncorrectaExcepcion dataIncorrectaExcepcion) {
-            return new ResponseEntity<>(RespuestaBaseDTO.builder()
-                    .codigoEstado(HttpStatus.CONFLICT.value())
-                    .mensaje(dataIncorrectaExcepcion.getMessage())
-                    .isCorrecto(false)
+                    .mensaje(e.getMessage())
                     .build(), HttpStatus.CONFLICT);
         }
     }
 
 
-   */
 
 
 
-/*    @GetMapping(value = "estado/{id}", headers = "Accept=application/json")
+
+    @GetMapping(value = "estado/{id}", headers = "Accept=application/json")
     public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
         try {
             return new ResponseEntity<>(estadoService.buscarPorId(id), HttpStatus.OK);
@@ -85,6 +71,16 @@ public class EstadoController
         }
     }
 
-
- */
+    @GetMapping(value = "estado", headers = "Accept=application/json")
+    public ResponseEntity<?> listarTodos() {
+        try {
+            return new ResponseEntity<>(estadoService.listarTodos(), HttpStatus.OK);
+        } catch (NoExisteEntidadExcepcion noExisteEntidadExcepcion) {
+            return new ResponseEntity<>(RespuestaBaseDTO.builder()
+                    .codigoEstado(HttpStatus.NOT_FOUND.value())
+                    .mensaje(noExisteEntidadExcepcion.getMessage())
+                    .isCorrecto(false)
+                    .build(), HttpStatus.NOT_FOUND);
+        }
+    }
 }

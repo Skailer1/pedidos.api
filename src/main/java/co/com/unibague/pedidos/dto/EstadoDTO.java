@@ -1,6 +1,6 @@
 package co.com.unibague.pedidos.dto;
 
-import co.com.unibague.pedidos.enums.DescripcionEstado;
+import co.com.unibague.pedidos.model.enums.DescripcionEstado;
 import co.com.unibague.pedidos.model.EstadoPedido;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,6 +24,7 @@ public class EstadoDTO
     public EstadoPedido covertirEstado() {
         return EstadoPedido.builder()
                 .id(id)
+                .descripcionEstado(descripcionEstado)
                 .isActivo(isActivo)
                 .fechaActualizacion(new Date())
                 .build();

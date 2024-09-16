@@ -1,6 +1,6 @@
 package co.com.unibague.pedidos.model;
 
-import co.com.unibague.pedidos.enums.DescripcionEstado;
+import co.com.unibague.pedidos.model.enums.DescripcionEstado;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 @Data
 @AllArgsConstructor

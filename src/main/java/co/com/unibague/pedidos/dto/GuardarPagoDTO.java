@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class GuardarPagoDTO
 {
-    private Long pedidoId;
+  //  private Long pedidoId;
     private Long empleadoId;
     private Long datosId;
     private PagoDTO pago;

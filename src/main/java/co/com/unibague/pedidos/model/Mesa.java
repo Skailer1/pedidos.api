@@ -28,6 +28,9 @@ public class Mesa implements  Serializable
     @Column(name = "nombre_mesa")
     private String nombreMesa;
     @Basic(optional = false)
+    @Column(name = "imagen_url")
+    private String imagenUrl;
+    @Basic(optional = false)
     @Column(name = "fecha_actualizacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActualizacion;
@@ -42,6 +45,7 @@ public class Mesa implements  Serializable
     private List<Pedido> pedidoList; */
 
     public boolean sonCamposValidos() {
-        return nombreMesa != null ;
+        return nombreMesa != null &&
+                imagenUrl != null ;
     }
 }

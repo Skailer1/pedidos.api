@@ -1,15 +1,14 @@
 package co.com.unibague.pedidos.controller;
 
 import co.com.unibague.pedidos.dto.GuardarPedidoDTO;
-import co.com.unibague.pedidos.dto.PedidoDTO;
 import co.com.unibague.pedidos.dto.RespuestaBaseDTO;
-import co.com.unibague.pedidos.model.Pedido;
-import co.com.unibague.pedidos.response.BaseResponse;
 import co.com.unibague.pedidos.service.exception.DataIncorrectaExcepcion;
 import co.com.unibague.pedidos.service.exception.EntidadInactivaExcepcion;
 import co.com.unibague.pedidos.service.exception.NoExisteEntidadExcepcion;
 import co.com.unibague.pedidos.service.exception.YaExisteEntidadExcepcion;
 import co.com.unibague.pedidos.service.impl.IPedidoService;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import jdk.nashorn.internal.runtime.JSONFunctions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +19,8 @@ import org.springframework.web.bind.annotation.*;
 public class PedidoController {
     @Autowired
     private IPedidoService pedidoService;
+
+
 
     @PostMapping(value = "pedido", headers = "Accept=application/json")
     public ResponseEntity<?> crear(@RequestBody GuardarPedidoDTO pedido) {
@@ -39,7 +40,25 @@ public class PedidoController {
                     .build(), HttpStatus.NOT_FOUND);
         }
     }
-    @PutMapping(value = "pedido/{id}", headers = "Accept=application/json")
+
+
+    @PostMapping(value = "pedido/detalle/{pedidoIdP}", headers = "Accept=application/json")
+    public ResponseEntity<?> listarPorPedido(@PathVariable Long pedidoIdP) {
+        try {
+            return new ResponseEntity<>(pedidoService.listarPorPedido(pedidoIdP), HttpStatus.OK);
+
+        } catch (NoExisteEntidadExcepcion noExisteEntidadExcepcion) {
+            return new ResponseEntity<>(RespuestaBaseDTO.builder()
+                    .codigoEstado(HttpStatus.NOT_FOUND.value())
+                    .mensaje(noExisteEntidadExcepcion.getMessage())
+                    .isCorrecto(false)
+                    .build(), HttpStatus.NOT_FOUND);
+        }
+    }
+
+
+
+    /* @PutMapping(value = "pedido/{id}", headers = "Accept=application/json")
     public ResponseEntity<?> actualizar(@PathVariable long id, @RequestBody PedidoDTO pedido) {
         try {
             return new ResponseEntity<>(pedidoService.actualizar(id, pedido.covertirPedido()), HttpStatus.OK);
@@ -63,8 +82,33 @@ public class PedidoController {
         }
     }
 
+    */
+   @GetMapping(value = "pedido", headers = "Accept=application/json")
+   public ResponseEntity<?> listarTodos() {
+       try {
+           return new ResponseEntity<>(pedidoService.listarTodos(), HttpStatus.OK);
+       } catch (NoExisteEntidadExcepcion noExisteEntidadExcepcion) {
+           return new ResponseEntity<>(RespuestaBaseDTO.builder()
+                   .codigoEstado(HttpStatus.NOT_FOUND.value())
+                   .mensaje(noExisteEntidadExcepcion.getMessage())
+                   .isCorrecto(false)
+                   .build(), HttpStatus.NOT_FOUND);
+       }
+   }
 
-
+  /*  @GetMapping(value = "pedido/detalles", headers = "Accept=application/json")
+    public ResponseEntity<?> listarTodosDetalles() {
+        try {
+            return new ResponseEntity<>(pedidoService.listarTodosDetalles(), HttpStatus.OK);
+        } catch (NoExisteEntidadExcepcion noExisteEntidadExcepcion) {
+            return new ResponseEntity<>(RespuestaBaseDTO.builder()
+                    .codigoEstado(HttpStatus.NOT_FOUND.value())
+                    .mensaje(noExisteEntidadExcepcion.getMessage())
+                    .isCorrecto(false)
+                    .build(), HttpStatus.NOT_FOUND);
+        }
+    }
+*/
 
     @GetMapping(value = "pedido/{id}", headers = "Accept=application/json")
     public ResponseEntity<?> buscarPorId(@PathVariable Long id) {

@@ -1,4 +1,4 @@
-package co.com.unibague.pedidos.response;
+package co.com.unibague.pedidos.util.response;
 
 public class EmpleadoResponse
 {

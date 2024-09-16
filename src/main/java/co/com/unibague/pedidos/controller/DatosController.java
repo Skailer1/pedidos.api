@@ -1,7 +1,7 @@
 package co.com.unibague.pedidos.controller;
 
 import co.com.unibague.pedidos.dto.RespuestaBaseDTO;
-import co.com.unibague.pedidos.response.BaseResponse;
+import co.com.unibague.pedidos.util.response.BaseResponse;
 import co.com.unibague.pedidos.service.exception.NoExisteEntidadExcepcion;
 import co.com.unibague.pedidos.service.impl.IDatosService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +17,22 @@ import org.springframework.web.bind.annotation.RestController;
 public class DatosController
 {
 
-    // LO QUE MAS ME HA PUESTO PROBLEMA ES EL SERVICIO ESTE DE DATO
     @Autowired
     private IDatosService datosService;
 
+
+    @GetMapping(value = "datos", headers = "Accept=application/json")
+    public ResponseEntity<?> listarTodos() {
+        try {
+            return new ResponseEntity<>(datosService.listarTodos(), HttpStatus.OK);
+        } catch (NoExisteEntidadExcepcion noExisteEntidadExcepcion) {
+            return new ResponseEntity<>(RespuestaBaseDTO.builder()
+                    .codigoEstado(HttpStatus.NOT_FOUND.value())
+                    .mensaje(noExisteEntidadExcepcion.getMessage())
+                    .isCorrecto(false)
+                    .build(), HttpStatus.NOT_FOUND);
+        }
+    }
 
 
     @GetMapping(value = "datos/{id}", headers = "Accept=application/json")

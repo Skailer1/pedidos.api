@@ -12,10 +12,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class GuardarPedidoDTO
-{
+public class GuardarPedidoDTO {
     private Long mesaId;
-    private Long empleadoId;
-    private PedidoDTO pedido;
-    //private List<DetallePedidoDTO> detallePedidoDTOList;
+    private Long usuarioId;
+    private List <GuardarDetalleDTO> detalles;
+    private PedidoDTO pedido = new PedidoDTO();
+
 }

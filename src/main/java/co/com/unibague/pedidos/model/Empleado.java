@@ -1,9 +1,9 @@
 package co.com.unibague.pedidos.model;
 
-import co.com.unibague.pedidos.enums.RH;
-import co.com.unibague.pedidos.enums.Sexo;
-import co.com.unibague.pedidos.enums.TipoDocumentoEnum;
-import co.com.unibague.pedidos.enums.TipoEmpleadoEnum;
+import co.com.unibague.pedidos.model.enums.RH;
+import co.com.unibague.pedidos.model.enums.Sexo;
+import co.com.unibague.pedidos.model.enums.TipoDocumentoEnum;
+import co.com.unibague.pedidos.model.enums.TipoEmpleadoEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,9 +33,6 @@ public class Empleado implements Serializable {
     @Column(name = "telefono")
     private long telefono;
     @Basic(optional = false)
-    @Column(name = "correo")
-    private String correo;
-    @Basic(optional = false)
     @Column(name = "direccion")
     private String direccion;
     @Basic(optional = false)
@@ -58,15 +55,15 @@ public class Empleado implements Serializable {
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "sexo")
     private Sexo sexo = Sexo.VACIO;
-    @JoinColumn(name = "tipo_documento", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private TipoDocumento tipoDocumento;
+    @Basic(optional = false)
+    @Column(name = "tipo_documento")
+    private TipoDocumentoEnum tipoDocumento;
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Usuario usuarioId;
-    @JoinColumn(name = "tipo_empleado", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private TipoEmpleado tipoEmpleado;
+    @Basic(optional = false)
+    @Column(name = "tipo_empleado")
+    private TipoEmpleadoEnum tipoEmpleado;
 
   /*  @OneToMany(cascade = CascadeType.ALL, mappedBy = "empleadoId")
     private List<Pago> pagoList; */
@@ -76,14 +73,14 @@ public class Empleado implements Serializable {
    /* @OneToMany(cascade = CascadeType.ALL, mappedBy = "empleadoId")
     private List<Pedido> pedidoList;*/
 
-    public boolean sonCamposValidos() {  //agregar el id en este metodo ? no amigo, ya sé cómo arreglarolo
+    public boolean sonCamposValidos() {
         return nombre != null &&
-                direccion != null &&
                 telefono > 0 &&
-                correo != null &&
                 rh != RH.VACIO &&
-                direccion != null &&
                 sexo != Sexo.VACIO &&
-                numeroDocumento > 0;
+                tipoEmpleado != TipoEmpleadoEnum.VACIO &&
+                tipoDocumento != TipoDocumentoEnum.VACIO &&
+                numeroDocumento > 0 &&
+                direccion != null ;
     }
 }

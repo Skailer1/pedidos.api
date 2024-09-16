@@ -1,15 +1,9 @@
 package co.com.unibague.pedidos.controller;
 
-import co.com.unibague.pedidos.dto.GuardarProductoDTO;
-import co.com.unibague.pedidos.dto.ProductoDTO;
 import co.com.unibague.pedidos.dto.RespuestaBaseDTO;
-import co.com.unibague.pedidos.model.Producto;
-import co.com.unibague.pedidos.response.BaseResponse;
-import co.com.unibague.pedidos.service.exception.DataIncorrectaExcepcion;
+import co.com.unibague.pedidos.util.response.BaseResponse;
 import co.com.unibague.pedidos.service.exception.EntidadInactivaExcepcion;
 import co.com.unibague.pedidos.service.exception.NoExisteEntidadExcepcion;
-import co.com.unibague.pedidos.service.exception.YaExisteEntidadExcepcion;
-import co.com.unibague.pedidos.service.impl.IPedidoService;
 import co.com.unibague.pedidos.service.impl.IProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,10 +18,10 @@ public class ProductoController
     private IProductoService productoService;
 
 
-    @GetMapping(value = "producto", headers = "Accept=application/json")
-    public ResponseEntity<?> listarTodos() {
+    @GetMapping(value = "producto/tipo/{tipoProductoId}", headers = "Accept=application/json")
+    public ResponseEntity<?> listarPorTipo(@PathVariable Long tipoProductoId) {
         try {
-            return new ResponseEntity<>(productoService.listarTodos(), HttpStatus.OK);
+            return new ResponseEntity<>(productoService.listarPorTipo(tipoProductoId), HttpStatus.OK);
         } catch (NoExisteEntidadExcepcion noExisteEntidadExcepcion) {
             return new ResponseEntity<>(BaseResponse.builder()
                     .isCorrecto(false)
@@ -35,6 +29,20 @@ public class ProductoController
                     .build(), HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping(value = "producto", headers = "Accept=application/json")
+    public ResponseEntity<?> listarTodos() {
+        try {
+            return new ResponseEntity<>(productoService.listarTodos(), HttpStatus.OK);
+        } catch (NoExisteEntidadExcepcion noExisteEntidadExcepcion) {
+            return new ResponseEntity<>(RespuestaBaseDTO.builder()
+                    .codigoEstado(HttpStatus.NOT_FOUND.value())
+                    .mensaje(noExisteEntidadExcepcion.getMessage())
+                    .isCorrecto(false)
+                    .build(), HttpStatus.NOT_FOUND);
+        }
+    }
+
 
     @GetMapping(value = "producto/{id}", headers = "Accept=application/json")
     public ResponseEntity<?> buscarPorId(@PathVariable Long id) {

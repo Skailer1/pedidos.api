@@ -21,13 +21,13 @@ public class TipoDocumentoService implements ITipoDocumentoService {
     @Autowired
     private TipoDocumentoRepository tipoDocumentoRepository;
 
-    @Override
+  /*  @Override
     public TipoDocumento crear(TipoDocumento tipoDocumento) throws YaExisteEntidadExcepcion, DataIncorrectaExcepcion {
         if (!tipoDocumento.sonCamposValidos()) {
             throw new DataIncorrectaExcepcion("Verifique la información enviada");
         /*} else if (tipoDocumentoRepository.findByNumeroDocumentoAndTipoDocumento(tipoDocumento.getId(), tipoDocumento.getDescripcionDocumento()).isPresent()) {
             throw new YaExisteEntidadExcepcion("Ya existe un tipoDocumento con ese numero de tipoDocumento y tipo de tipoDocumento"); */
-        } else if (tipoDocumentoRepository.findById(tipoDocumento.getId()).isPresent()) {
+   /*     } else if (tipoDocumentoRepository.findById(tipoDocumento.getId()).isPresent()) {
             throw new YaExisteEntidadExcepcion("Ya existe un tipoDocumento con ese id");
         } else {
             tipoDocumento.setFechaCreacion(new Date());
@@ -61,7 +61,7 @@ public class TipoDocumentoService implements ITipoDocumentoService {
         }
         return resultado;
     }
-
+*/
     @Override
     public List<TipoDocumento> listarTodos() throws NoExisteEntidadExcepcion {
         List<TipoDocumento> tipoDocumentos = tipoDocumentoRepository.findAll();
@@ -85,6 +85,7 @@ public class TipoDocumentoService implements ITipoDocumentoService {
             return tipoDocumentoBuscado;
         }
     }
+
 
 
 }
